@@ -67,7 +67,6 @@ export function LoginPage() {
                 {!isLoading && <ArrowRightIcon size={16} />}
               </button>
             </div>
-            {error && <p className="text-red-500 text-sm">{error}</p>}
             <p className="text-sm text-gray-500 mt-2">
               Hint: Use "admin" to access the admin panel or any other text for
               regular user access.
