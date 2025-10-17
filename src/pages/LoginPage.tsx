@@ -1,31 +1,36 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowRightIcon, LockIcon } from 'lucide-react';
+import { useAuth } from '../contexts/AuthContext';
+import toast from 'react-hot-toast';
+
 export function LoginPage() {
   const [accessCode, setAccessCode] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
   const navigate = useNavigate();
-  const handleLogin = (e: React.FormEvent) => {
+  const { loginWithAccessCode } = useAuth();
+
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    setError('');
-    // Simulate API call with timeout
-    setTimeout(() => {
-      // For demo purposes, handle admin login with special code
+
+    try {
+      await loginWithAccessCode(accessCode);
+      
+      // Navigate based on access code
       if (accessCode.toLowerCase() === 'admin') {
-        localStorage.setItem('isAuthenticated', 'true');
-        localStorage.setItem('isAdmin', 'true');
         navigate('/admin');
-      } else if (accessCode.trim().length > 0) {
-        localStorage.setItem('isAuthenticated', 'true');
-        localStorage.removeItem('isAdmin');
-        navigate('/dashboard');
       } else {
-        setError('Please enter an access code');
+        navigate('/dashboard');
       }
+      
+      toast.success('Welcome to Toiral!');
+    } catch (error: any) {
+      console.error('Login error:', error);
+      toast.error('Login failed. Please try again.');
+    } finally {
       setIsLoading(false);
-    }, 800);
+    }
   };
   return <div className="min-h-screen bg-gradient-to-br from-lavender to-cream-light flex flex-col">
       {/* Navbar */}
