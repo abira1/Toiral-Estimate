@@ -4,9 +4,15 @@ import { HomeIcon, ListIcon, PackageIcon, SettingsIcon, LogOutIcon, LayoutGridIc
 import { useAuth } from '../contexts/AuthContext';
 export function Sidebar() {
   const navigate = useNavigate();
-  const handleLogout = () => {
-    localStorage.removeItem('isAuthenticated');
-    navigate('/');
+  const { logout } = useAuth();
+  
+  const handleLogout = async () => {
+    try {
+      await logout();
+      navigate('/');
+    } catch (error) {
+      console.error('Logout failed:', error);
+    }
   };
   return <>
       {/* Desktop Sidebar */}
