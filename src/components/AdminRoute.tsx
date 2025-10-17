@@ -1,18 +1,21 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
+
 type AdminRouteProps = {
   children: React.ReactNode;
 };
-export function AdminRoute({
-  children
-}: AdminRouteProps) {
-  const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true';
-  const isAdmin = localStorage.getItem('isAdmin') === 'true';
-  if (!isAuthenticated) {
+
+export function AdminRoute({ children }: AdminRouteProps) {
+  const { currentUser, userProfile } = useAuth();
+
+  if (!currentUser) {
     return <Navigate to="/" replace />;
   }
-  if (!isAdmin) {
+
+  if (userProfile?.role !== 'admin') {
     return <Navigate to="/dashboard" replace />;
   }
+
   return <>{children}</>;
 }
