@@ -59,6 +59,14 @@ export function Sidebar() {
                 <span className="ml-3 hidden lg:block">My Quotations</span>
               </NavLink>
             </li>
+            <li>
+              <NavLink to="/analytics" className={({
+              isActive
+            }) => `flex items-center p-3 rounded-xl transition-colors ${isActive ? 'bg-primary-50 text-primary-700' : 'text-gray-600 hover:bg-gray-100'}`}>
+                <BarChart3Icon size={20} className="flex-shrink-0" />
+                <span className="ml-3 hidden lg:block">Analytics</span>
+              </NavLink>
+            </li>
           </ul>
         </div>
         <div className="p-4 border-t border-gray-200">
