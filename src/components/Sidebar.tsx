@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { HomeIcon, ListIcon, PackageIcon, SettingsIcon, LogOutIcon, LayoutGridIcon, BriefcaseIcon } from 'lucide-react';
+import { HomeIcon, ListIcon, PackageIcon, SettingsIcon, LogOutIcon, LayoutGridIcon, BriefcaseIcon, BarChart3Icon } from 'lucide-react';
+import { useAuth } from '../contexts/AuthContext';
 export function Sidebar() {
   const navigate = useNavigate();
   const handleLogout = () => {
