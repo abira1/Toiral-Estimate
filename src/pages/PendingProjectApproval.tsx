@@ -1,0 +1,259 @@
+import React, { useEffect, useState } from 'react';
+import { Sidebar } from '../components/Sidebar';
+import { useNavigate } from 'react-router-dom';
+import { ArrowLeftIcon, CheckIcon, ChevronRightIcon, PlusIcon, XIcon } from 'lucide-react';
+type ServicePackage = {
+  id: string;
+  category: string;
+  name: string;
+  price: number;
+  description: string;
+  features: string[];
+};
+type AddOn = {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  selected: boolean;
+};
+type PendingProject = {
+  id: string;
+  name: string;
+  description: string;
+  createdDate: string;
+  servicePackage: ServicePackage;
+  customPrice?: number;
+  notes?: string;
+};
+export function PendingProjectApproval() {
+  const navigate = useNavigate();
+  const [pendingProject, setPendingProject] = useState<PendingProject | null>(null);
+  const [addOns, setAddOns] = useState<AddOn[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    // Load the pending project from localStorage
+    const storedProject = localStorage.getItem('pendingProject');
+    if (storedProject) {
+      setPendingProject(JSON.parse(storedProject));
+    } else {
+      // If there's no pending project, redirect to projects page
+      navigate('/my-projects');
+    }
+    // Load available add-ons
+    setAddOns([{
+      id: 'addon-1',
+      name: 'Priority Support',
+      description: '24/7 customer support with 4-hour response time',
+      price: 99,
+      selected: false
+    }, {
+      id: 'addon-2',
+      name: 'SEO Package',
+      description: 'Basic SEO optimization for better search engine rankings',
+      price: 149,
+      selected: false
+    }, {
+      id: 'addon-3',
+      name: 'Content Creation',
+      description: 'Professional copywriting for up to 5 pages',
+      price: 199,
+      selected: false
+    }, {
+      id: 'addon-4',
+      name: 'Analytics Setup',
+      description: 'Google Analytics and reporting dashboard setup',
+      price: 79,
+      selected: false
+    }, {
+      id: 'addon-5',
+      name: 'Extended Support',
+      description: 'Additional 30 days of technical support',
+      price: 129,
+      selected: false
+    }]);
+    setIsLoading(false);
+  }, [navigate]);
+  const toggleAddOn = (id: string) => {
+    setAddOns(addOns.map(addon => addon.id === id ? {
+      ...addon,
+      selected: !addon.selected
+    } : addon));
+  };
+  const calculateTotal = () => {
+    if (!pendingProject) return 0;
+    const packagePrice = pendingProject.customPrice || pendingProject.servicePackage.price;
+    const addOnsPrice = addOns.filter(addon => addon.selected).reduce((sum, addon) => sum + addon.price, 0);
+    return packagePrice + addOnsPrice;
+  };
+  const handleContinue = () => {
+    if (!pendingProject) return;
+    // Store selected package and add-ons in localStorage
+    const selectedAddOns = addOns.filter(addon => addon.selected);
+    // Store the custom package as the selected package
+    localStorage.setItem('selectedPackageId', pendingProject.servicePackage.id);
+    localStorage.setItem('selectedAddOns', JSON.stringify(selectedAddOns));
+    localStorage.setItem('quotationTotal', calculateTotal().toString());
+    // Store custom package details if needed
+    localStorage.setItem('customPackagePrice', pendingProject.customPrice ? pendingProject.customPrice.toString() : pendingProject.servicePackage.price.toString());
+    // Navigate to final quotation page
+    navigate('/final-quotation');
+  };
+  const handleCancel = () => {
+    // Clear the pending project from localStorage
+    localStorage.removeItem('pendingProject');
+    // Navigate back to projects
+    navigate('/my-projects');
+  };
+  if (isLoading || !pendingProject) {
+    return <div className="bg-lavender-light min-h-screen">
+        <Sidebar />
+        <div className="sm:pl-20 lg:pl-64 p-6 flex justify-center items-center h-screen">
+          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary-600"></div>
+        </div>
+      </div>;
+  }
+  return <div className="bg-lavender-light min-h-screen">
+      <Sidebar />
+      <div className="sm:pl-20 lg:pl-64 pb-20 sm:pb-0">
+        <div className="p-4 sm:p-6">
+          <button onClick={handleCancel} className="flex items-center text-gray-600 hover:text-primary-600 transition-colors mb-6">
+            <ArrowLeftIcon size={18} className="mr-2" />
+            Back to My Projects
+          </button>
+          <div className="mb-6">
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-800">
+              Review Custom Package
+            </h1>
+            <p className="text-gray-600">
+              Review your custom package and select any additional add-ons
+            </p>
+          </div>
+          {/* Package Details */}
+          <div className="bg-white rounded-2xl shadow-retro-lg border border-gray-200 p-6 mb-6">
+            <h2 className="text-xl font-semibold mb-4 text-gray-800 flex items-center">
+              <span className="flex h-6 w-6 bg-primary-100 rounded-full items-center justify-center mr-2">
+                <span className="text-primary-600">1</span>
+              </span>
+              Custom Package Details
+            </h2>
+            <div className="bg-primary-50 rounded-xl p-4 border border-primary-200">
+              <div className="flex justify-between items-start mb-3">
+                <div>
+                  <h3 className="font-medium text-gray-800">
+                    {pendingProject.servicePackage.category} -{' '}
+                    {pendingProject.servicePackage.name}
+                  </h3>
+                  <p className="text-sm text-gray-600">
+                    {pendingProject.servicePackage.description}
+                  </p>
+                </div>
+                <div className="text-right">
+                  {pendingProject.customPrice ? <>
+                      <span className="font-bold text-xl text-primary-700">
+                        ${pendingProject.customPrice}
+                      </span>
+                      <div className="text-xs text-green-600 line-through">
+                        ${pendingProject.servicePackage.price}
+                      </div>
+                    </> : <span className="font-bold text-xl text-primary-700">
+                      ${pendingProject.servicePackage.price}
+                    </span>}
+                </div>
+              </div>
+              <h4 className="font-medium text-gray-700 mb-2 mt-4">
+                Included Features:
+              </h4>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                {pendingProject.servicePackage.features.map((feature, index) => <div key={index} className="flex items-start">
+                      <CheckIcon size={16} className="text-primary-600 mr-2 mt-0.5 flex-shrink-0" />
+                      <span className="text-sm">{feature}</span>
+                    </div>)}
+              </div>
+              {pendingProject.notes && <div className="mt-4 pt-4 border-t border-primary-200">
+                  <h4 className="font-medium text-gray-700 mb-2">
+                    Admin Notes:
+                  </h4>
+                  <p className="text-sm text-gray-600 bg-white p-3 rounded-lg border border-primary-100">
+                    {pendingProject.notes}
+                  </p>
+                </div>}
+            </div>
+          </div>
+          {/* Add-ons Section */}
+          <div className="bg-white rounded-2xl shadow-retro-lg border border-gray-200 p-6 mb-6">
+            <h2 className="text-xl font-semibold mb-4 text-gray-800 flex items-center">
+              <span className="flex h-6 w-6 bg-primary-100 rounded-full items-center justify-center mr-2">
+                <span className="text-primary-600">2</span>
+              </span>
+              Select Add-ons (Optional)
+            </h2>
+            <div className="grid md:grid-cols-2 gap-4">
+              {addOns.map(addon => <div key={addon.id} className={`border-2 rounded-xl p-4 cursor-pointer transition-all ${addon.selected ? 'border-secondary-500 bg-secondary-50' : 'border-gray-200 hover:border-gray-300'}`} onClick={() => toggleAddOn(addon.id)}>
+                  <div className="flex justify-between items-start">
+                    <div className="flex-1">
+                      <h4 className="font-medium text-gray-800">
+                        {addon.name}
+                      </h4>
+                      <p className="text-sm text-gray-600 mt-1">
+                        {addon.description}
+                      </p>
+                    </div>
+                    <div className="ml-4 flex flex-col items-end">
+                      <span className="font-semibold text-secondary-700">
+                        ${addon.price}
+                      </span>
+                      <div className={`mt-2 h-5 w-5 rounded-full flex items-center justify-center ${addon.selected ? 'bg-secondary-500' : 'bg-gray-200'}`}>
+                        {addon.selected && <CheckIcon size={14} className="text-white" />}
+                      </div>
+                    </div>
+                  </div>
+                </div>)}
+            </div>
+          </div>
+          {/* Order Summary */}
+          <div className="bg-white rounded-2xl shadow-retro-lg border border-gray-200 p-6 mb-6">
+            <h2 className="text-xl font-semibold mb-4 text-gray-800 flex items-center">
+              <span className="flex h-6 w-6 bg-primary-100 rounded-full items-center justify-center mr-2">
+                <span className="text-primary-600">3</span>
+              </span>
+              Order Summary
+            </h2>
+            <div className="bg-gray-50 rounded-xl p-4">
+              <div className="flex justify-between items-center pb-3 border-b border-gray-200">
+                <span className="font-medium">Package Price:</span>
+                <span className="font-medium">
+                  $
+                  {pendingProject.customPrice || pendingProject.servicePackage.price}
+                </span>
+              </div>
+              {addOns.some(addon => addon.selected) && <div className="flex justify-between items-center py-3 border-b border-gray-200">
+                  <span className="font-medium">Selected Add-ons:</span>
+                  <span className="font-medium">
+                    $
+                    {addOns.filter(a => a.selected).reduce((sum, a) => sum + a.price, 0)}
+                  </span>
+                </div>}
+              <div className="flex justify-between items-center pt-3">
+                <span className="font-bold text-lg">Total:</span>
+                <span className="font-bold text-lg text-primary-700">
+                  ${calculateTotal()}
+                </span>
+              </div>
+            </div>
+          </div>
+          {/* Actions */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-end">
+            <button onClick={handleCancel} className="px-6 py-3 border-2 border-gray-300 text-gray-700 rounded-xl hover:bg-gray-100 transition-colors flex items-center justify-center gap-2">
+              <XIcon size={18} />
+              Cancel
+            </button>
+            <button onClick={handleContinue} className="px-6 py-3 bg-primary-600 text-white rounded-xl hover:bg-primary-700 transition-colors flex items-center justify-center gap-2">
+              Continue to Final Quote
+              <ChevronRightIcon size={18} />
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>;
+}
