@@ -310,7 +310,7 @@ export function PendingProjectApproval() {
               Cancel
             </button>
             <button onClick={handleContinue} className="px-6 py-3 bg-primary-600 text-white rounded-xl hover:bg-primary-700 transition-colors flex items-center justify-center gap-2">
-              Continue to Final Quote
+              Continue to Final Review
               <ChevronRightIcon size={18} />
             </button>
           </div>
