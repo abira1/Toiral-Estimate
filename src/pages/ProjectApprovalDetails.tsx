@@ -26,7 +26,7 @@ import toast from 'react-hot-toast';
 export function ProjectApprovalDetails() {
   const navigate = useNavigate();
   const { quotationId } = useParams<{ quotationId: string }>();
-  const { user } = useAuth();
+  const { currentUser, userProfile } = useAuth();
   
   const [quotation, setQuotation] = useState<ClientQuotation | null>(null);
   const [selectedAddOns, setSelectedAddOns] = useState<ProjectAddOn[]>([]);
