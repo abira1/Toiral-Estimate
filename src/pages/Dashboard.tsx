@@ -135,8 +135,8 @@ export function Dashboard() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {/* Current Project Progress */}
             <div className="lg:col-span-2 space-y-6">
-              <div className="bg-white rounded-2xl shadow-retro-lg border border-gray-200 p-6">
-                <h2 className="text-xl font-semibold mb-4 text-gray-800">
+              <section className="bg-white rounded-2xl shadow-retro-lg border border-gray-200 p-6" aria-labelledby="projects-heading">
+                <h2 id="projects-heading" className="text-xl font-semibold mb-4 text-gray-800">
                   Current Project Progress
                 </h2>
                 {activeProjects.length > 0 ? <div className="space-y-6">
