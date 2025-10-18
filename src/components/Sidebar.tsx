@@ -28,42 +28,72 @@ export function Sidebar() {
         <nav className="flex-1 py-8 px-2 lg:px-4" role="navigation" aria-label="Primary navigation">
           <ul className="space-y-2" role="list">
             <li>
-              <NavLink to="/dashboard" className={({
-              isActive
-            }) => `flex items-center p-3 rounded-xl transition-colors ${isActive ? 'bg-primary-50 text-primary-700' : 'text-gray-600 hover:bg-gray-100'}`}>
-                <HomeIcon size={20} className="flex-shrink-0" />
+              <NavLink 
+                to="/dashboard" 
+                className={({ isActive }) => 
+                  `flex items-center p-3 rounded-xl transition-colors focus:ring-2 focus:ring-primary-500 focus:outline-none ${
+                    isActive ? 'bg-primary-50 text-primary-700' : 'text-gray-600 hover:bg-gray-100'
+                  }`
+                }
+                aria-label="Go to Dashboard"
+              >
+                <HomeIcon size={20} className="flex-shrink-0" aria-hidden="true" />
                 <span className="ml-3 hidden lg:block">Dashboard</span>
               </NavLink>
             </li>
             <li>
-              <NavLink to="/services" className={({
-              isActive
-            }) => `flex items-center p-3 rounded-xl transition-colors ${isActive ? 'bg-primary-50 text-primary-700' : 'text-gray-600 hover:bg-gray-100'}`}>
-                <LayoutGridIcon size={20} className="flex-shrink-0" />
+              <NavLink 
+                to="/services" 
+                className={({ isActive }) => 
+                  `flex items-center p-3 rounded-xl transition-colors focus:ring-2 focus:ring-primary-500 focus:outline-none ${
+                    isActive ? 'bg-primary-50 text-primary-700' : 'text-gray-600 hover:bg-gray-100'
+                  }`
+                }
+                aria-label="Browse Services"
+              >
+                <LayoutGridIcon size={20} className="flex-shrink-0" aria-hidden="true" />
                 <span className="ml-3 hidden lg:block">Services</span>
               </NavLink>
             </li>
             <li>
-              <NavLink to="/my-projects" className={({
-              isActive
-            }) => `flex items-center p-3 rounded-xl transition-colors ${isActive ? 'bg-primary-50 text-primary-700' : 'text-gray-600 hover:bg-gray-100'}`}>
-                <BriefcaseIcon size={20} className="flex-shrink-0" />
+              <NavLink 
+                to="/my-projects" 
+                className={({ isActive }) => 
+                  `flex items-center p-3 rounded-xl transition-colors focus:ring-2 focus:ring-primary-500 focus:outline-none ${
+                    isActive ? 'bg-primary-50 text-primary-700' : 'text-gray-600 hover:bg-gray-100'
+                  }`
+                }
+                aria-label="View My Projects"
+              >
+                <BriefcaseIcon size={20} className="flex-shrink-0" aria-hidden="true" />
                 <span className="ml-3 hidden lg:block">My Projects</span>
               </NavLink>
             </li>
             <li>
-              <NavLink to="/my-quotations" className={({
-              isActive
-            }) => `flex items-center p-3 rounded-xl transition-colors ${isActive ? 'bg-primary-50 text-primary-700' : 'text-gray-600 hover:bg-gray-100'}`}>
-                <ListIcon size={20} className="flex-shrink-0" />
+              <NavLink 
+                to="/my-quotations" 
+                className={({ isActive }) => 
+                  `flex items-center p-3 rounded-xl transition-colors focus:ring-2 focus:ring-primary-500 focus:outline-none ${
+                    isActive ? 'bg-primary-50 text-primary-700' : 'text-gray-600 hover:bg-gray-100'
+                  }`
+                }
+                aria-label="View My Quotations"
+              >
+                <ListIcon size={20} className="flex-shrink-0" aria-hidden="true" />
                 <span className="ml-3 hidden lg:block">My Quotations</span>
               </NavLink>
             </li>
             <li>
-              <NavLink to="/analytics" className={({
-              isActive
-            }) => `flex items-center p-3 rounded-xl transition-colors ${isActive ? 'bg-primary-50 text-primary-700' : 'text-gray-600 hover:bg-gray-100'}`}>
-                <BarChart3Icon size={20} className="flex-shrink-0" />
+              <NavLink 
+                to="/analytics" 
+                className={({ isActive }) => 
+                  `flex items-center p-3 rounded-xl transition-colors focus:ring-2 focus:ring-primary-500 focus:outline-none ${
+                    isActive ? 'bg-primary-50 text-primary-700' : 'text-gray-600 hover:bg-gray-100'
+                  }`
+                }
+                aria-label="View Analytics"
+              >
+                <BarChart3Icon size={20} className="flex-shrink-0" aria-hidden="true" />
                 <span className="ml-3 hidden lg:block">Analytics</span>
               </NavLink>
             </li>
