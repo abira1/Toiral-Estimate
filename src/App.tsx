@@ -110,6 +110,10 @@ function AppWithKeyboardShortcuts() {
         onClose={() => setIsShortcutsOpen(false)} 
         shortcuts={shortcuts}
       />
+      
+      {/* PWA Components */}
+      <PWAInstallPrompt />
+      <PWAUpdatePrompt />
     </>
   );
 }
