@@ -75,6 +75,9 @@ function AppWithKeyboardShortcuts() {
         <Route path="/dashboard" element={<ProtectedRoute>
               <Dashboard />
             </ProtectedRoute>} />
+        <Route path="/client-dashboard" element={<ProtectedRoute>
+              <ClientDashboard />
+            </ProtectedRoute>} />
         <Route path="/my-quotations" element={<ProtectedRoute>
               <MyQuotations />
             </ProtectedRoute>} />
