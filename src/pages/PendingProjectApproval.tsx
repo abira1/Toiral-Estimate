@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Sidebar } from '../components/Sidebar';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
 import { ArrowLeftIcon, CheckIcon, ChevronRightIcon, PlusIcon, XIcon } from 'lucide-react';
+import { AddOnsSelectionModal } from '../components/AddOnsSelectionModal';
+import { getProjectSetupByClient } from '../services/workflowService';
+import { ProjectSetup, ProjectAddOn, Coupon } from '../types/workflow';
+import toast from 'react-hot-toast';
+
 type ServicePackage = {
   id: string;
   category: string;
@@ -9,13 +15,6 @@ type ServicePackage = {
   price: number;
   description: string;
   features: string[];
-};
-type AddOn = {
-  id: string;
-  name: string;
-  description: string;
-  price: number;
-  selected: boolean;
 };
 type PendingProject = {
   id: string;
