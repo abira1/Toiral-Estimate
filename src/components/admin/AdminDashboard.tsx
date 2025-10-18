@@ -56,6 +56,12 @@ export function AdminDashboard() {
         <h1 className="text-3xl font-bold text-gray-800">Admin Dashboard</h1>
         <p className="text-gray-600">Overview of your business metrics</p>
       </div>
+      
+      {/* Seed Data Button */}
+      <div className="mb-6">
+        <SeedDataButton />
+      </div>
+      
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         <div className="bg-white rounded-2xl shadow-retro border border-gray-200 p-6">
