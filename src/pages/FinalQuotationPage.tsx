@@ -23,6 +23,7 @@ type AddOn = {
 };
 export function FinalQuotationPage() {
   const navigate = useNavigate();
+  const { userProfile } = useAuth();
   const [selectedPackage, setSelectedPackage] = useState<ServicePackage | null>(null);
   const [selectedAddOns, setSelectedAddOns] = useState<AddOn[]>([]);
   const [quotationName, setQuotationName] = useState('New Quotation');
