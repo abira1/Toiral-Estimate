@@ -50,7 +50,7 @@ export function PendingProjectApprovals() {
       const items: PendingProjectItem[] = [];
 
       // Load pending quotations from workflow system
-      const dashboardData = await getClientDashboardData(user.id);
+      const dashboardData = await getClientDashboardData(currentUser.uid);
       
       // Add pending quotations
       dashboardData.pendingApprovals.forEach((quotation) => {
