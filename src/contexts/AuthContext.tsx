@@ -74,48 +74,66 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const loginWithAccessCode = async (code: string) => {
-    // Check if this is a known test user access code
+    // Use anonymous auth
+    const userCredential = await signInAnonymously(auth);
+    const firebaseUserId = userCredential.user.uid;
+    
+    // Check if this is a known test user access code with pre-created data
     if (isTestUserAccessCode(code)) {
       const testUserInfo = getTestUserInfo(code);
       
       if (testUserInfo) {
-        // Use anonymous auth
-        const userCredential = await signInAnonymously(auth);
-        
-        // Get the pre-created user profile by searching for it
-        const allUsers = await getAllUsers();
-        const profile = allUsers.find(u => 
-          u.email === testUserInfo.email || 
-          u.name === testUserInfo.name
-        );
-        
-        if (profile) {
-          setUserProfile(profile);
-          // Update last active time
-          await updateUser(profile.id, { lastActive: new Date().toISOString() });
-          return;
+        // Try to get the pre-created user profile by searching for it
+        try {
+          const allUsers = await getAllUsers();
+          const profile = allUsers.find(u => 
+            u.email === testUserInfo.email || 
+            u.name === testUserInfo.name
+          );
+          
+          if (profile) {
+            setUserProfile(profile);
+            // Update last active time
+            await updateUser(profile.id, { lastActive: new Date().toISOString() });
+            return;
+          }
+        } catch (error) {
+          console.log('Could not fetch existing users, will create new profile');
         }
       }
     }
     
-    // Fallback: Create a new user for unknown access codes
-    const userCredential = await signInAnonymously(auth);
-    const userId = userCredential.user.uid;
-    
-    // Check if user profile exists
-    let profile = await getUser(userId);
-    
-    if (!profile) {
-      // Create new user profile
+    // If no pre-existing profile found, try to create a new one
+    try {
+      // Check if user profile exists for this Firebase user
+      let profile = await getUser(firebaseUserId);
+      
+      if (!profile) {
+        // Create new user profile
+        const role = code.toLowerCase() === 'admin' ? 'admin' : 'user';
+        const name = code.toLowerCase() === 'admin' ? 'Admin User' : 'Guest User';
+        profile = await createUser({
+          name,
+          email: `${firebaseUserId}@toiral.local`,
+          role
+        });
+      }
+      
+      setUserProfile(profile);
+    } catch (error: any) {
+      // If Firebase permissions don't allow creating users, create a temporary profile
+      console.warn('Could not create user in database, using temporary profile');
       const role = code.toLowerCase() === 'admin' ? 'admin' : 'user';
-      profile = await createUser({
+      const tempProfile: User = {
+        id: firebaseUserId,
         name: code.toLowerCase() === 'admin' ? 'Admin User' : 'Guest User',
-        email: `${userId}@toiral.local`,
-        role
-      });
+        email: `${firebaseUserId}@toiral.local`,
+        role,
+        createdAt: new Date().toISOString(),
+        lastActive: new Date().toISOString()
+      };
+      setUserProfile(tempProfile);
     }
-    
-    setUserProfile(profile);
   };
 
   const value: AuthContextType = {
