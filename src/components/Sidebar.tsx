@@ -125,37 +125,65 @@ export function Sidebar() {
         </div>
       </aside>
       {/* Mobile Bottom Navigation */}
-      <div className="sm:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-50">
-        <div className="flex justify-around items-center py-2">
-          <NavLink to="/dashboard" className={({
-          isActive
-        }) => `flex flex-col items-center p-2 rounded-xl transition-colors ${isActive ? 'text-primary-700' : 'text-gray-600'}`}>
-            <HomeIcon size={24} />
+      <nav className="sm:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-50" role="navigation" aria-label="Mobile navigation">
+        <div className="flex justify-around items-center py-2" role="list">
+          <NavLink 
+            to="/dashboard" 
+            className={({ isActive }) => 
+              `flex flex-col items-center p-2 rounded-xl transition-colors focus:ring-2 focus:ring-primary-500 focus:outline-none ${
+                isActive ? 'text-primary-700' : 'text-gray-600'
+              }`
+            }
+            aria-label="Go to Dashboard"
+          >
+            <HomeIcon size={24} aria-hidden="true" />
             <span className="text-xs mt-1">Home</span>
           </NavLink>
-          <NavLink to="/services" className={({
-          isActive
-        }) => `flex flex-col items-center p-2 rounded-xl transition-colors ${isActive ? 'text-primary-700' : 'text-gray-600'}`}>
-            <LayoutGridIcon size={24} />
+          <NavLink 
+            to="/services" 
+            className={({ isActive }) => 
+              `flex flex-col items-center p-2 rounded-xl transition-colors focus:ring-2 focus:ring-primary-500 focus:outline-none ${
+                isActive ? 'text-primary-700' : 'text-gray-600'
+              }`
+            }
+            aria-label="Browse Services"
+          >
+            <LayoutGridIcon size={24} aria-hidden="true" />
             <span className="text-xs mt-1">Services</span>
           </NavLink>
-          <NavLink to="/my-projects" className={({
-          isActive
-        }) => `flex flex-col items-center p-2 rounded-xl transition-colors ${isActive ? 'text-primary-700' : 'text-gray-600'}`}>
-            <BriefcaseIcon size={24} />
+          <NavLink 
+            to="/my-projects" 
+            className={({ isActive }) => 
+              `flex flex-col items-center p-2 rounded-xl transition-colors focus:ring-2 focus:ring-primary-500 focus:outline-none ${
+                isActive ? 'text-primary-700' : 'text-gray-600'
+              }`
+            }
+            aria-label="View My Projects"
+          >
+            <BriefcaseIcon size={24} aria-hidden="true" />
             <span className="text-xs mt-1">Projects</span>
           </NavLink>
-          <NavLink to="/my-quotations" className={({
-          isActive
-        }) => `flex flex-col items-center p-2 rounded-xl transition-colors ${isActive ? 'text-primary-700' : 'text-gray-600'}`}>
-            <ListIcon size={24} />
+          <NavLink 
+            to="/my-quotations" 
+            className={({ isActive }) => 
+              `flex flex-col items-center p-2 rounded-xl transition-colors focus:ring-2 focus:ring-primary-500 focus:outline-none ${
+                isActive ? 'text-primary-700' : 'text-gray-600'
+              }`
+            }
+            aria-label="View My Quotations"
+          >
+            <ListIcon size={24} aria-hidden="true" />
             <span className="text-xs mt-1">Quotes</span>
           </NavLink>
-          <button onClick={handleLogout} className="flex flex-col items-center p-2 rounded-xl transition-colors text-gray-600">
-            <LogOutIcon size={24} />
+          <button 
+            onClick={handleLogout} 
+            className="flex flex-col items-center p-2 rounded-xl transition-colors text-gray-600 focus:ring-2 focus:ring-primary-500 focus:outline-none"
+            aria-label="Log out of your account"
+          >
+            <LogOutIcon size={24} aria-hidden="true" />
             <span className="text-xs mt-1">Logout</span>
           </button>
         </div>
-      </div>
+      </nav>
     </>;
 }
