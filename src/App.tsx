@@ -6,7 +6,7 @@ import { DataInitializer } from './components/DataInitializer';
 import { LoginPage } from './pages/LoginPage';
 import { Dashboard } from './pages/Dashboard';
 import { MyQuotations } from './pages/MyQuotations';
-import { ServicesPage } from './pages/ServicesPage';
+import { ServicesPageNew } from './pages/ServicesPageNew';
 import { ProtectedRoute } from './components/ProtectedRoute';
 import { AdminPanel } from './pages/AdminPanel';
 import { AdminRoute } from './components/AdminRoute';
