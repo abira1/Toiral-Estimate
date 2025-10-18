@@ -75,9 +75,60 @@ export const getAccessCodeByCode = async (code: string): Promise<AccessCode | nu
 // Mark access code as used
 export const markAccessCodeAsUsed = async (accessCodeId: string): Promise<void> => {
   const accessCodeRef = ref(database, `access-codes/${accessCodeId}`);
-  await set(accessCodeRef, {
+  await update(accessCodeRef, {
     used: true,
     usedAt: new Date().toISOString()
+  });
+};
+
+// Enhanced functions for client workflow integration
+
+// Create access code for client invitation
+export const createClientAccessCode = async (
+  clientId: string,
+  clientCode: string,
+  email: string,
+  userName: string,
+  createdBy: string
+): Promise<AccessCode> => {
+  const accessCodeRef = push(ref(database, 'access-codes'));
+  const accessCodeId = accessCodeRef.key!;
+  
+  const code = generateAccessCode();
+  const expirationDate = new Date();
+  expirationDate.setDate(expirationDate.getDate() + 7); // 7 days expiry
+  
+  const accessCode: AccessCode = {
+    id: accessCodeId,
+    code,
+    email,
+    userName,
+    role: 'user',
+    createdAt: new Date().toISOString(),
+    createdBy,
+    used: false,
+    expiresAt: expirationDate.toISOString(),
+    clientId,
+    clientCode,
+    accessType: 'invitation'
+  };
+  
+  await set(accessCodeRef, accessCode);
+  return accessCode;
+};
+
+// Get access code with client information
+export const getAccessCodeWithClientInfo = async (code: string): Promise<AccessCode | null> => {
+  const accessCode = await getAccessCodeByCode(code);
+  return accessCode;
+};
+
+// Link existing access code to client
+export const linkAccessCodeToClient = async (accessCodeId: string, clientId: string, clientCode: string): Promise<void> => {
+  const accessCodeRef = ref(database, `access-codes/${accessCodeId}`);
+  await update(accessCodeRef, {
+    clientId,
+    clientCode
   });
 };
 
