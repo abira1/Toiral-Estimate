@@ -71,22 +71,45 @@ export function InviteUserModal({ isOpen, onClose, onInviteSent }: InviteUserMod
     } catch (error) {
       console.error('Error sending invitation:', error);
       
-      // Provide specific error messages
-      let errorMessage = 'Failed to send invitation. ';
+      // Provide specific and helpful error messages
+      let errorMessage = '❌ Failed to send invitation. ';
+      let errorDetails = '';
       
       if (error instanceof Error) {
-        if (error.message.includes('EmailJS')) {
-          errorMessage += 'Email service configuration issue. Please check EmailJS settings.';
+        if (error.message.includes('Template Error (422)')) {
+          errorMessage = '📧 EmailJS Template Issue';
+          errorDetails = 'The email template configuration needs to be updated. Please contact support or check the EmailJS dashboard.';
+        } else if (error.message.includes('EmailJS Error (404)')) {
+          errorMessage = '🔍 EmailJS Template Not Found';
+          errorDetails = 'The email template or service was not found. Please verify the EmailJS configuration.';
+        } else if (error.message.includes('EmailJS Unauthorized (401)')) {
+          errorMessage = '🔐 EmailJS Authentication Failed';
+          errorDetails = 'Invalid EmailJS credentials. Please check the public key and service configuration.';
+        } else if (error.message.includes('Rate Limit (429)')) {
+          errorMessage = '⏰ Too Many Requests';
+          errorDetails = 'Please wait a moment before sending another invitation.';
         } else if (error.message.includes('Permission denied')) {
-          errorMessage += 'Firebase permission issue. Please check database rules.';
+          errorMessage = '🔥 Firebase Permission Issue';
+          errorDetails = 'Access code was created, but there may be Firebase permission issues.';
+        } else if (error.message.includes('EmailJS configuration is incomplete')) {
+          errorMessage = '⚙️ EmailJS Configuration Missing';
+          errorDetails = 'EmailJS service is not properly configured. Please check environment variables.';
         } else {
-          errorMessage += `Error: ${error.message}`;
+          errorMessage = '🚨 Unexpected Error';
+          errorDetails = error.message;
         }
       } else {
-        errorMessage += 'Please check your network connection and try again.';
+        errorMessage = '🌐 Network Error';
+        errorDetails = 'Please check your internet connection and try again.';
       }
       
-      toast.error(errorMessage, { duration: 6000 });
+      toast.error(`${errorMessage}\n\n${errorDetails}`, { 
+        duration: 8000,
+        style: { 
+          maxWidth: '500px',
+          fontSize: '14px'
+        }
+      });
     } finally {
       setIsLoading(false);
     }
