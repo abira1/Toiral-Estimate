@@ -144,16 +144,15 @@ export function FinalQuotationPage() {
     doc.save(quotationName.replace(/\s+/g, '_') + '.pdf');
   };
   const saveQuotation = async () => {
-    if (!selectedPackage) return;
+    if (!selectedPackage || !userProfile) {
+      toast.error('Please ensure you are logged in and have selected a package.');
+      return;
+    }
     
     try {
-      // Import Firebase services
-      const { createQuotation } = await import('../services/firebaseService');
-      const { useAuth } = await import('../contexts/AuthContext');
-      
       const quotation = {
         name: quotationName,
-        userId: 'current_user_id', // Will be replaced with actual user ID
+        userId: userProfile.id,
         clientInfo: clientInfo,
         servicePackage: selectedPackage,
         addOns: selectedAddOns,
@@ -170,14 +169,13 @@ export function FinalQuotationPage() {
       localStorage.removeItem('selectedAddOns');
       localStorage.removeItem('quotationTotal');
       
-      // Show success notification
-      alert('Quotation saved successfully!');
+      toast.success('Quotation saved successfully!');
       
       // Navigate to my quotations
       navigate('/my-quotations');
     } catch (error) {
       console.error('Error saving quotation:', error);
-      alert('Error saving quotation. Please try again.');
+      toast.error('Error saving quotation. Please try again.');
     }
   };
   return <div className="bg-lavender-light min-h-screen">
