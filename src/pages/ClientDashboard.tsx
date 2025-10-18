@@ -55,7 +55,7 @@ export function ClientDashboard() {
       setDashboardData(data);
 
       // Check for pending project setup
-      const projectSetup = await getProjectSetupByClient(user.id);
+      const projectSetup = await getProjectSetupByClient(currentUser.uid);
       setPendingProjectSetup(projectSetup);
 
       // Calculate statistics
