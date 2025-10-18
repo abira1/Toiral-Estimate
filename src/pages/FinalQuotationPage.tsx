@@ -3,6 +3,9 @@ import { Sidebar } from '../components/Sidebar';
 import { CheckIcon, DownloadIcon, CreditCardIcon, TagIcon, ArrowRightIcon, AlertCircleIcon } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { jsPDF } from 'jspdf';
+import { useAuth } from '../contexts/AuthContext';
+import { createQuotation } from '../services/firebaseService';
+import toast from 'react-hot-toast';
 type ServicePackage = {
   id: string;
   category: string;
