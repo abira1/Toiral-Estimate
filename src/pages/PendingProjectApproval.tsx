@@ -214,30 +214,56 @@ export function PendingProjectApproval() {
               <span className="flex h-6 w-6 bg-primary-100 rounded-full items-center justify-center mr-2">
                 <span className="text-primary-600">2</span>
               </span>
-              Select Add-ons (Optional)
+              Customize with Add-ons
             </h2>
-            <div className="grid md:grid-cols-2 gap-4">
-              {addOns.map(addon => <div key={addon.id} className={`border-2 rounded-xl p-4 cursor-pointer transition-all ${addon.selected ? 'border-secondary-500 bg-secondary-50' : 'border-gray-200 hover:border-gray-300'}`} onClick={() => toggleAddOn(addon.id)}>
-                  <div className="flex justify-between items-start">
-                    <div className="flex-1">
-                      <h4 className="font-medium text-gray-800">
-                        {addon.name}
-                      </h4>
-                      <p className="text-sm text-gray-600 mt-1">
-                        {addon.description}
-                      </p>
-                    </div>
-                    <div className="ml-4 flex flex-col items-end">
-                      <span className="font-semibold text-secondary-700">
-                        ${addon.price}
-                      </span>
-                      <div className={`mt-2 h-5 w-5 rounded-full flex items-center justify-center ${addon.selected ? 'bg-secondary-500' : 'bg-gray-200'}`}>
-                        {addon.selected && <CheckIcon size={14} className="text-white" />}
+            
+            {selectedAddOns.length > 0 ? (
+              <div className="space-y-3 mb-4">
+                <div className="bg-secondary-50 border border-secondary-200 rounded-xl p-4">
+                  <h4 className="font-medium text-secondary-800 mb-2">
+                    Selected Add-ons ({selectedAddOns.length})
+                  </h4>
+                  <div className="grid md:grid-cols-2 gap-2">
+                    {selectedAddOns.map(addon => (
+                      <div key={addon.id} className="flex items-center justify-between text-sm">
+                        <div className="flex items-center">
+                          <CheckIcon size={14} className="text-secondary-600 mr-2" />
+                          <span>{addon.name}</span>
+                        </div>
+                        <span className="font-semibold text-secondary-700">+${addon.price}</span>
+                      </div>
+                    ))}
+                  </div>
+                  {appliedCoupon && (
+                    <div className="mt-3 pt-3 border-t border-secondary-200">
+                      <div className="flex items-center justify-between text-sm">
+                        <div className="flex items-center text-green-600">
+                          <CheckIcon size={14} className="mr-2" />
+                          <span>Coupon: {appliedCoupon.code}</span>
+                        </div>
+                        <span className="font-semibold text-green-600">
+                          -{appliedCoupon.discountType === 'percentage' ? `${appliedCoupon.discount}%` : `$${appliedCoupon.discount}`}
+                        </span>
                       </div>
                     </div>
-                  </div>
-                </div>)}
-            </div>
+                  )}
+                </div>
+              </div>
+            ) : (
+              <div className="bg-gray-50 border border-gray-200 rounded-xl p-6 mb-4 text-center">
+                <PlusIcon className="h-12 w-12 text-gray-400 mx-auto mb-3" />
+                <p className="text-gray-600 mb-2">No add-ons selected</p>
+                <p className="text-sm text-gray-500">Enhance your project with additional features and services</p>
+              </div>
+            )}
+            
+            <button
+              onClick={handleOpenAddOnsModal}
+              className="w-full bg-secondary-600 text-white px-6 py-3 rounded-xl hover:bg-secondary-700 transition-colors flex items-center justify-center gap-2"
+            >
+              <PlusIcon size={18} />
+              {selectedAddOns.length > 0 ? 'Modify Add-ons & Coupons' : 'Select Add-ons & Apply Coupons'}
+            </button>
           </div>
           {/* Order Summary */}
           <div className="bg-white rounded-2xl shadow-retro-lg border border-gray-200 p-6 mb-6">
