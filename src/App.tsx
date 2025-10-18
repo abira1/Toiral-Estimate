@@ -68,39 +68,59 @@ function AppWithKeyboardShortcuts() {
           },
         }}
       />
-      <Routes>
-            <Route path="/" element={<LoginPage />} />
-            <Route path="/dashboard" element={<ProtectedRoute>
-                  <Dashboard />
-                </ProtectedRoute>} />
-            <Route path="/my-quotations" element={<ProtectedRoute>
-                  <MyQuotations />
-                </ProtectedRoute>} />
-            <Route path="/services" element={<ProtectedRoute>
-                  <ServicesPageNew />
-                </ProtectedRoute>} />
-            <Route path="/final-quotation" element={<ProtectedRoute>
-                  <FinalQuotationPage />
-                </ProtectedRoute>} />
-            <Route path="/my-projects" element={<ProtectedRoute>
-                  <MyProjects />
-                </ProtectedRoute>} />
-            <Route path="/pending-project-approval" element={<ProtectedRoute>
-                  <PendingProjectApproval />
-                </ProtectedRoute>} />
-            <Route path="/invoice" element={<ProtectedRoute>
-                  <InvoicePage />
-                </ProtectedRoute>} />
-            <Route path="/analytics" element={<ProtectedRoute>
-                  <AnalyticsPage />
-                </ProtectedRoute>} />
-            <Route path="/admin/*" element={<AdminRoute>
-                  <AdminPanel />
-                </AdminRoute>} />
-          </Routes>
-        </BrowserRouter>
-      </AuthProvider>
-    </DataInitializer>
-  </ErrorBoundary>
+        <Route path="/" element={<LoginPage />} />
+        <Route path="/dashboard" element={<ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>} />
+        <Route path="/my-quotations" element={<ProtectedRoute>
+              <MyQuotations />
+            </ProtectedRoute>} />
+        <Route path="/services" element={<ProtectedRoute>
+              <ServicesPageNew />
+            </ProtectedRoute>} />
+        <Route path="/final-quotation" element={<ProtectedRoute>
+              <FinalQuotationPage />
+            </ProtectedRoute>} />
+        <Route path="/my-projects" element={<ProtectedRoute>
+              <MyProjects />
+            </ProtectedRoute>} />
+        <Route path="/pending-project-approval" element={<ProtectedRoute>
+              <PendingProjectApproval />
+            </ProtectedRoute>} />
+        <Route path="/invoice" element={<ProtectedRoute>
+              <InvoicePage />
+            </ProtectedRoute>} />
+        <Route path="/analytics" element={<ProtectedRoute>
+              <AnalyticsPage />
+            </ProtectedRoute>} />
+        <Route path="/admin/*" element={<AdminRoute>
+              <AdminPanel />
+            </AdminRoute>} />
+      </Routes>
+      
+      <SearchModal 
+        isOpen={isSearchOpen} 
+        onClose={() => setIsSearchOpen(false)} 
+      />
+      <KeyboardShortcutsModal 
+        isOpen={isShortcutsOpen} 
+        onClose={() => setIsShortcutsOpen(false)} 
+        shortcuts={shortcuts}
+      />
+    </>
+  );
+}
+
+export function App() {
+  return (
+    <ErrorBoundary>
+      <DataInitializer>
+        <AuthProvider>
+          <BrowserRouter>
+            <AppWithKeyboardShortcuts />
+          </BrowserRouter>
+        </AuthProvider>
+      </DataInitializer>
+    </ErrorBoundary>
   );
 }
