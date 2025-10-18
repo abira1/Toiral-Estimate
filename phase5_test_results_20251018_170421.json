@@ -1,0 +1,107 @@
+{
+  "total_tests": 10,
+  "passed_tests": 2,
+  "failed_tests": 8,
+  "partial_tests": 0,
+  "success_rate": 20.0,
+  "test_results": [
+    {
+      "test": "Firebase Connectivity",
+      "status": "FAIL",
+      "details": "HTTP 401: {\n  \"error\" : \"Permission denied\"\n}\n",
+      "error": "",
+      "timestamp": "2025-10-18T17:04:07.974551"
+    },
+    {
+      "test": "Client Management - Creation",
+      "status": "FAIL",
+      "details": "HTTP 401: {\n  \"error\" : \"Permission denied\"\n}\n",
+      "error": "",
+      "timestamp": "2025-10-18T17:04:09.400030"
+    },
+    {
+      "test": "Project Setup Workflow",
+      "status": "FAIL",
+      "details": "",
+      "error": "Client ID not available from previous test",
+      "timestamp": "2025-10-18T17:04:10.400773"
+    },
+    {
+      "test": "Coupon Management - Creation",
+      "status": "FAIL",
+      "details": "Only created 0/3 coupons",
+      "error": "",
+      "timestamp": "2025-10-18T17:04:12.921158"
+    },
+    {
+      "test": "Dynamic Pricing - Base Price",
+      "status": "PASS",
+      "details": "Base price calculation: $1200",
+      "error": "",
+      "timestamp": "2025-10-18T17:04:13.921980"
+    },
+    {
+      "test": "Dynamic Pricing - Add-ons Calculation",
+      "status": "PASS",
+      "details": "Subtotal with add-ons: $1448",
+      "error": "",
+      "timestamp": "2025-10-18T17:04:13.922019"
+    },
+    {
+      "test": "Dynamic Pricing - Percentage Discount",
+      "status": "PASS",
+      "details": "Final price with 10% discount: $1303.20",
+      "error": "",
+      "timestamp": "2025-10-18T17:04:13.922032"
+    },
+    {
+      "test": "Dynamic Pricing - Fixed Discount",
+      "status": "PASS",
+      "details": "Final price with $50 discount: $1398",
+      "error": "",
+      "timestamp": "2025-10-18T17:04:13.922039"
+    },
+    {
+      "test": "Dynamic Pricing - Delivery Time Calculation",
+      "status": "PASS",
+      "details": "Total delivery time: 24 days",
+      "error": "",
+      "timestamp": "2025-10-18T17:04:13.922047"
+    },
+    {
+      "test": "Client Quotation Workflow",
+      "status": "FAIL",
+      "details": "",
+      "error": "Required test data not available",
+      "timestamp": "2025-10-18T17:04:14.922131"
+    },
+    {
+      "test": "Project Approval Workflow",
+      "status": "FAIL",
+      "details": "",
+      "error": "Quotation ID not available",
+      "timestamp": "2025-10-18T17:04:15.922252"
+    },
+    {
+      "test": "Client Dashboard Data Integration",
+      "status": "FAIL",
+      "details": "",
+      "error": "Client ID not available",
+      "timestamp": "2025-10-18T17:04:16.922376"
+    },
+    {
+      "test": "Workflow Status Tracking",
+      "status": "FAIL",
+      "details": "",
+      "error": "Client ID not available",
+      "timestamp": "2025-10-18T17:04:17.922506"
+    },
+    {
+      "test": "Test Data Cleanup",
+      "status": "PASS",
+      "details": "Cleaned up 0/3 test records",
+      "error": "",
+      "timestamp": "2025-10-18T17:04:20.229936"
+    }
+  ]
+}
