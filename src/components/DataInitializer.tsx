@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { initializeTestUsers } from '../services/testUsersData';
-import { saveTestUserMapping, getTestUserMappings } from '../services/testUserMappings';
+import { getTestUserMappings } from '../services/testUserMappings';
 import { Loader2 } from 'lucide-react';
 
 interface DataInitializerProps {
