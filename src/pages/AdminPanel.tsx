@@ -84,6 +84,7 @@ export function AdminPanel() {
         <div className={`transition-all duration-300 ${isSidebarOpen ? 'sm:ml-0' : 'ml-0'}`}>
           <Routes>
             <Route path="/" element={<AdminDashboard />} />
+            <Route path="/clients" element={<WorkflowUserManagement />} />
             <Route path="/users" element={<UserManagement />} />
             <Route path="/services" element={<ServiceManagementNew />} />
             <Route path="/quotations" element={<QuotationManagement />} />
