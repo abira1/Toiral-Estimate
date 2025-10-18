@@ -180,25 +180,31 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
     
     // If no pre-existing profile found, try to create a new one
+    console.log('🔧 Creating new profile for Firebase user:', firebaseUserId);
     try {
       // Check if user profile exists for this Firebase user
       let profile = await getUser(firebaseUserId);
+      console.log('👤 Existing profile check result:', profile ? 'found' : 'not found');
       
       if (!profile) {
         // Create new user profile
         const role = code.toLowerCase() === 'admin' ? 'admin' : 'user';
         const name = code.toLowerCase() === 'admin' ? 'Admin User' : 'Guest User';
+        console.log('🆕 Creating new user profile:', { name, role });
         profile = await createUser({
           name,
           email: `${firebaseUserId}@toiral.local`,
           role
         });
+        console.log('✅ Created new profile:', profile.name);
       }
       
+      console.log('📝 Setting user profile:', profile.name);
       setUserProfile(profile);
+      console.log('✅ Login successful for:', profile.name);
     } catch (error: any) {
       // If Firebase permissions don't allow creating users, create a temporary profile
-      console.warn('Could not create user in database, using temporary profile');
+      console.warn('Could not create user in database, using temporary profile:', error);
       const role = code.toLowerCase() === 'admin' ? 'admin' : 'user';
       const tempProfile: User = {
         id: firebaseUserId,
@@ -208,11 +214,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         createdAt: new Date().toISOString(),
         lastActive: new Date().toISOString()
       };
+      console.log('🔄 Using temporary profile:', tempProfile.name);
       setUserProfile(tempProfile);
+      console.log('✅ Login successful with temp profile for:', tempProfile.name);
     }
     
     // If we reached here and it's not a known test code, it's invalid
     if (!isKnownTestCode) {
+      console.log('❌ Invalid access code:', code);
       throw new Error('INVALID_ACCESS_CODE: Invalid access code. Please check your code and try again.');
     }
   };
