@@ -16,7 +16,7 @@ export function Sidebar() {
   };
   return <>
       {/* Desktop Sidebar */}
-      <div className="bg-white border-r border-gray-200 w-20 lg:w-64 flex-col h-screen fixed hidden sm:flex">
+      <aside className="bg-white border-r border-gray-200 w-20 lg:w-64 flex-col h-screen fixed hidden sm:flex" role="complementary" aria-label="Main navigation">
         <div className="p-4 border-b border-gray-200 flex items-center justify-center lg:justify-start">
           <div className="h-10 w-10 bg-white rounded-lg flex items-center justify-center p-1">
             <img src="/toiraal.png" alt="Toiral Logo" className="h-full w-full object-contain" />
@@ -25,8 +25,8 @@ export function Sidebar() {
             Toiral
           </span>
         </div>
-        <div className="flex-1 py-8 px-2 lg:px-4">
-          <ul className="space-y-2">
+        <nav className="flex-1 py-8 px-2 lg:px-4" role="navigation" aria-label="Primary navigation">
+          <ul className="space-y-2" role="list">
             <li>
               <NavLink to="/dashboard" className={({
               isActive
