@@ -27,7 +27,20 @@ export function LoginPage() {
       toast.success('Welcome to Toiral!');
     } catch (error: any) {
       console.error('Login error:', error);
-      toast.error('Login failed. Please try again.');
+      
+      // Handle specific error types with user-friendly messages
+      if (error.message.includes('ACCESS_CODE_EMPTY')) {
+        toast.error('Please enter an access code to continue.');
+      } else if (error.message.includes('ACCESS_CODE_TOO_SHORT')) {
+        toast.error('Access code must be at least 3 characters long.');
+      } else if (error.message.includes('INVALID_ACCESS_CODE')) {
+        toast.error('Invalid access code. Please check and try again.\n\nValid codes: admin, testuser1, testuser2, testuser3');
+      } else if (error.message.includes('Firebase')) {
+        toast.error('Connection error. Please check your internet and try again.');
+      } else {
+        // Generic fallback for unknown errors
+        toast.error('Login failed. Please try again or contact support.');
+      }
     } finally {
       setIsLoading(false);
     }
