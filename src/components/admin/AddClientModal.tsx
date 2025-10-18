@@ -11,7 +11,7 @@ interface AddClientModalProps {
 }
 
 export function AddClientModal({ isOpen, onClose, onClientAdded }: AddClientModalProps) {
-  const { user } = useAuth();
+  const { currentUser, userProfile } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   
   // Form state
