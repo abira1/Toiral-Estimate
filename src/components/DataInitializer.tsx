@@ -74,7 +74,15 @@ export const DataInitializer: React.FC<DataInitializerProps> = ({ children }) =>
         setIsReady(true);
       } catch (err: any) {
         console.error('❌ Failed to initialize test data:', err);
-        setError(err.message || 'Failed to initialize test data');
+        
+        // Check if it's a permission error
+        if (err.message && err.message.includes('PERMISSION_DENIED')) {
+          console.log('ℹ️ Firebase permission error - app will work with existing data or require manual setup');
+          setError(null); // Don't show error, just continue
+        } else {
+          setError(err.message || 'Failed to initialize test data');
+        }
+        
         // Allow app to load even if initialization fails
         setIsReady(true);
       } finally {
