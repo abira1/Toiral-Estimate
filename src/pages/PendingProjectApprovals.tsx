@@ -67,7 +67,7 @@ export function PendingProjectApprovals() {
       });
 
       // Check for pending project setup
-      const projectSetup = await getProjectSetupByClient(user.id);
+      const projectSetup = await getProjectSetupByClient(currentUser.uid);
       if (projectSetup && projectSetup.status === 'sent_to_client') {
         items.push({
           id: projectSetup.id,
