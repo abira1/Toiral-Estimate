@@ -325,9 +325,9 @@ export const initializeTestUsers = async () => {
         phone: '+1 (555) 234-5678'
       },
       servicePackage: services[5], // Social Media Growth
-      addOns: [sampleAddOns[3]], // Email Marketing
+      addOns: services[5].addOns ? [services[5].addOns[1]] : [], // Influencer Outreach
       discount: 0,
-      totalPrice: 675, // 600 + 75
+      totalPrice: 800, // 600 + 200
       status: 'draft',
       createdAt: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(),
       updatedAt: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString()
@@ -354,9 +354,9 @@ export const initializeTestUsers = async () => {
         phone: '+1 (555) 345-6789'
       },
       servicePackage: services[2], // Web Design Premium
-      addOns: [sampleAddOns[1], sampleAddOns[2]], // CMS + SEO
+      addOns: services[2].addOns ? [services[2].addOns[0], services[2].addOns[1]] : [], // Brand Guidelines + Developer Handoff
       discount: 15,
-      totalPrice: 637.5, // 500 + 150 + 100 - 15% discount
+      totalPrice: 722.5, // 500 + 200 + 150 - 15% discount
       status: 'approved',
       createdAt: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString(),
       updatedAt: new Date(Date.now() - 28 * 24 * 60 * 60 * 1000).toISOString()
