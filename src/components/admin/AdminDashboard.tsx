@@ -31,6 +31,7 @@ export function AdminDashboard() {
   const [services, setServices] = useState<ServicePackage[]>([]);
   const [totalRevenue, setTotalRevenue] = useState(0);
   const [serviceDistribution, setServiceDistribution] = useState<Record<string, number>>({});
+  const [isInviteModalOpen, setIsInviteModalOpen] = useState(false);
   useEffect(() => {
     // Load data from localStorage
     const storedUsers = JSON.parse(localStorage.getItem('users') || '[]');
