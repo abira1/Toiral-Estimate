@@ -3,7 +3,7 @@ import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { LayoutDashboardIcon, UsersIcon, PackageIcon, FileTextIcon, LogOutIcon, ChevronLeftIcon } from 'lucide-react';
 import { AdminDashboard } from '../components/admin/AdminDashboard';
 import { UserManagement } from '../components/admin/UserManagement';
-import { ServiceManagement } from '../components/admin/ServiceManagement';
+import { ServiceManagementNew } from '../components/admin/ServiceManagementNew';
 import { QuotationManagement } from '../components/admin/QuotationManagement';
 import { PackageSetup } from '../components/admin/PackageSetup';
 export function AdminPanel() {
