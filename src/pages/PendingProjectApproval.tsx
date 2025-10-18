@@ -281,11 +281,18 @@ export function PendingProjectApproval() {
                   {pendingProject.customPrice || pendingProject.servicePackage.price}
                 </span>
               </div>
-              {addOns.some(addon => addon.selected) && <div className="flex justify-between items-center py-3 border-b border-gray-200">
+              {selectedAddOns.length > 0 && <div className="flex justify-between items-center py-3 border-b border-gray-200">
                   <span className="font-medium">Selected Add-ons:</span>
                   <span className="font-medium">
-                    $
-                    {addOns.filter(a => a.selected).reduce((sum, a) => sum + a.price, 0)}
+                    +${selectedAddOns.reduce((sum, addon) => sum + addon.price, 0)}
+                  </span>
+                </div>}
+              {appliedCoupon && <div className="flex justify-between items-center py-3 border-b border-gray-200 text-green-600">
+                  <span className="font-medium">Discount ({appliedCoupon.code}):</span>
+                  <span className="font-medium">
+                    -{appliedCoupon.discountType === 'percentage' ? 
+                      `${appliedCoupon.discount}%` : 
+                      `$${appliedCoupon.discount}`}
                   </span>
                 </div>}
               <div className="flex justify-between items-center pt-3">
