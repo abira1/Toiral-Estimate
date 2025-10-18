@@ -1,4 +1,4 @@
-import emailjs from 'emailjs-com';
+import emailjs from '@emailjs/browser';
 
 // EmailJS configuration
 // You'll need to create an account at https://www.emailjs.com/
