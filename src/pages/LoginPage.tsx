@@ -11,16 +11,21 @@ export function LoginPage() {
   const { loginWithAccessCode } = useAuth();
 
   const handleLogin = async (e: React.FormEvent) => {
+    console.log('🚀 handleLogin called with access code:', accessCode);
     e.preventDefault();
     setIsLoading(true);
 
     try {
+      console.log('📞 Calling loginWithAccessCode...');
       await loginWithAccessCode(accessCode);
+      console.log('✅ loginWithAccessCode completed successfully');
       
       // Navigate based on access code
       if (accessCode.toLowerCase() === 'admin') {
+        console.log('🔄 Navigating to /admin');
         navigate('/admin');
       } else {
+        console.log('🔄 Navigating to /dashboard');
         navigate('/dashboard');
       }
       
