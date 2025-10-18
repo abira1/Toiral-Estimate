@@ -22,55 +22,57 @@ const AdminPanel = lazy(() => import('./pages/AdminPanel').then(m => ({ default:
 
 export function App() {
   return (
-    <DataInitializer>
-      <AuthProvider>
-        <BrowserRouter>
-        <Toaster 
-          position="top-right"
-          toastOptions={{
-            duration: 3000,
-            style: {
-              background: '#fff',
-              color: '#363636',
-              borderRadius: '12px',
-              border: '2px solid #e5e7eb',
-            },
-          }}
-        />
-        <Suspense fallback={<LoadingScreen />}>
-          <Routes>
-            <Route path="/" element={<LoginPage />} />
-            <Route path="/dashboard" element={<ProtectedRoute>
-                  <Dashboard />
-                </ProtectedRoute>} />
-            <Route path="/my-quotations" element={<ProtectedRoute>
-                  <MyQuotations />
-                </ProtectedRoute>} />
-            <Route path="/services" element={<ProtectedRoute>
-                  <ServicesPageNew />
-                </ProtectedRoute>} />
-            <Route path="/final-quotation" element={<ProtectedRoute>
-                  <FinalQuotationPage />
-                </ProtectedRoute>} />
-            <Route path="/my-projects" element={<ProtectedRoute>
-                  <MyProjects />
-                </ProtectedRoute>} />
-            <Route path="/pending-project-approval" element={<ProtectedRoute>
-                  <PendingProjectApproval />
-                </ProtectedRoute>} />
-            <Route path="/invoice" element={<ProtectedRoute>
-                  <InvoicePage />
-                </ProtectedRoute>} />
-            <Route path="/analytics" element={<ProtectedRoute>
-                  <AnalyticsPage />
-                </ProtectedRoute>} />
-            <Route path="/admin/*" element={<AdminRoute>
-                  <AdminPanel />
-                </AdminRoute>} />
-          </Routes>
-        </Suspense>
-      </BrowserRouter>
-    </AuthProvider>
-  </DataInitializer>
+    <ErrorBoundary>
+      <DataInitializer>
+        <AuthProvider>
+          <BrowserRouter>
+          <Toaster 
+            position="top-right"
+            toastOptions={{
+              duration: 3000,
+              style: {
+                background: '#fff',
+                color: '#363636',
+                borderRadius: '12px',
+                border: '2px solid #e5e7eb',
+              },
+            }}
+          />
+          <Suspense fallback={<LoadingScreen />}>
+            <Routes>
+              <Route path="/" element={<LoginPage />} />
+              <Route path="/dashboard" element={<ProtectedRoute>
+                    <Dashboard />
+                  </ProtectedRoute>} />
+              <Route path="/my-quotations" element={<ProtectedRoute>
+                    <MyQuotations />
+                  </ProtectedRoute>} />
+              <Route path="/services" element={<ProtectedRoute>
+                    <ServicesPageNew />
+                  </ProtectedRoute>} />
+              <Route path="/final-quotation" element={<ProtectedRoute>
+                    <FinalQuotationPage />
+                  </ProtectedRoute>} />
+              <Route path="/my-projects" element={<ProtectedRoute>
+                    <MyProjects />
+                  </ProtectedRoute>} />
+              <Route path="/pending-project-approval" element={<ProtectedRoute>
+                    <PendingProjectApproval />
+                  </ProtectedRoute>} />
+              <Route path="/invoice" element={<ProtectedRoute>
+                    <InvoicePage />
+                  </ProtectedRoute>} />
+              <Route path="/analytics" element={<ProtectedRoute>
+                    <AnalyticsPage />
+                  </ProtectedRoute>} />
+              <Route path="/admin/*" element={<AdminRoute>
+                    <AdminPanel />
+                  </AdminRoute>} />
+            </Routes>
+          </Suspense>
+        </BrowserRouter>
+      </AuthProvider>
+    </DataInitializer>
+  </ErrorBoundary>
   );
 }
