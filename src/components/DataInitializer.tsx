@@ -27,10 +27,11 @@ export const DataInitializer: React.FC<DataInitializerProps> = ({ children }) =>
           return;
         }
 
-        console.log('🔄 Initializing test data for the first time...');
+        console.log('🔄 Checking for existing test data...');
         setIsInitializing(true);
 
-        // Initialize test users and sample data
+        // Try to initialize test users and sample data
+        // This will fail if Firebase rules don't allow writes before auth
         const result = await initializeTestUsers();
 
         // Save test user mappings for login
