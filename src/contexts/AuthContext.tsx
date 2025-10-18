@@ -89,14 +89,15 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const userCredential = await signInAnonymously(auth);
     const firebaseUserId = userCredential.user.uid;
     
-    // First, check if this is a generated access code
+    // First, try to validate against Firebase access codes (existing system)
     try {
       const accessCodeData = await getAccessCodeByCode(code);
+      
       if (accessCodeData) {
         // Mark access code as used
         await markAccessCodeAsUsed(accessCodeData.id);
         
-        // Create user profile based on access code data
+        // Create user profile based on access code information
         const profile = await createUser({
           name: accessCodeData.userName,
           email: accessCodeData.email,
@@ -107,7 +108,36 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         return;
       }
     } catch (error) {
-      console.log('Could not validate access code, checking test user codes');
+      console.log('Could not validate access code against Firebase, checking other systems');
+    }
+
+    // Second, check if this is a client access code from the new workflow system
+    try {
+      // Try to find client by access code
+      const clientsWithCodes = await getAllClients();
+      const clientWithCode = clientsWithCodes.find(client => client.accessCode === code);
+      
+      if (clientWithCode) {
+        // Create a user profile for this client
+        const clientProfile: User = {
+          id: firebaseUserId,
+          name: clientWithCode.name,
+          email: clientWithCode.email,
+          role: 'user',
+          createdAt: new Date().toISOString(),
+          lastActive: new Date().toISOString(),
+          phone: clientWithCode.phone
+        };
+        
+        // Store client ID for reference
+        localStorage.setItem('clientId', clientWithCode.id);
+        localStorage.setItem('clientCode', clientWithCode.clientCode);
+        
+        setUserProfile(clientProfile);
+        return;
+      }
+    } catch (error) {
+      console.log('Could not validate client access code, checking test user codes');
     }
     
     // Check if this is a known test user access code with pre-created data
