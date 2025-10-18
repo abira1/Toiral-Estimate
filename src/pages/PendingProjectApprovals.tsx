@@ -42,7 +42,7 @@ export function PendingProjectApprovals() {
 
   const loadPendingApprovals = async () => {
     try {
-      if (!user?.id) {
+      if (!currentUser?.uid) {
         setLoading(false);
         return;
       }
