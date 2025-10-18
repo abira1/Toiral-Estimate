@@ -19,6 +19,8 @@ import { AnalyticsPage } from './pages/AnalyticsPage';
 import { SearchModal } from './components/SearchModal';
 import { KeyboardShortcutsModal } from './components/KeyboardShortcutsModal';
 import { useKeyboardShortcuts, KeyboardShortcut } from './hooks/useKeyboardShortcuts';
+import { PWAInstallPrompt } from './components/PWAInstallPrompt';
+import { PWAUpdatePrompt } from './components/PWAUpdatePrompt';
 
 function AppWithKeyboardShortcuts() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
