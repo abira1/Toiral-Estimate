@@ -37,48 +37,63 @@ export function PendingProjectApproval() {
   const [isLoading, setIsLoading] = useState(true);
   const [showAddOnsModal, setShowAddOnsModal] = useState(false);
   useEffect(() => {
-    // Load the pending project from localStorage
-    const storedProject = localStorage.getItem('pendingProject');
-    if (storedProject) {
-      setPendingProject(JSON.parse(storedProject));
-    } else {
-      // If there's no pending project, redirect to projects page
-      navigate('/my-projects');
+    loadPendingProject();
+  }, [navigate, user]);
+
+  const loadPendingProject = async () => {
+    try {
+      // First try to load from localStorage (for backward compatibility)
+      const storedProject = localStorage.getItem('pendingProject');
+      if (storedProject) {
+        const project = JSON.parse(storedProject);
+        setPendingProject(project);
+        setFinalPrice(project.customPrice || project.servicePackage.price);
+        setFinalDeliveryTime(14); // Default delivery time
+      }
+
+      // Also try to load from workflow system if user is available
+      if (user?.id) {
+        const setup = await getProjectSetupByClient(user.id);
+        if (setup && setup.status === 'sent_to_client') {
+          setProjectSetup(setup);
+          
+          // If no localStorage project, create one from the setup
+          if (!storedProject) {
+            const projectFromSetup: PendingProject = {
+              id: setup.id,
+              name: setup.projectName,
+              description: setup.description,
+              createdDate: setup.createdAt,
+              servicePackage: {
+                id: 'custom',
+                category: 'Custom Project',
+                name: setup.projectName,
+                price: setup.basePrice,
+                description: setup.description,
+                features: setup.features
+              },
+              customPrice: setup.basePrice
+            };
+            setPendingProject(projectFromSetup);
+            setFinalPrice(setup.basePrice);
+            setFinalDeliveryTime(setup.baseDeadline);
+          }
+        }
+      }
+
+      if (!storedProject && (!user?.id || !projectSetup)) {
+        // If there's no pending project, redirect to projects page
+        navigate('/my-projects');
+        return;
+      }
+
+    } catch (error) {
+      console.error('Error loading pending project:', error);
+      toast.error('Failed to load pending project');
+    } finally {
+      setIsLoading(false);
     }
-    // Load available add-ons
-    setAddOns([{
-      id: 'addon-1',
-      name: 'Priority Support',
-      description: '24/7 customer support with 4-hour response time',
-      price: 99,
-      selected: false
-    }, {
-      id: 'addon-2',
-      name: 'SEO Package',
-      description: 'Basic SEO optimization for better search engine rankings',
-      price: 149,
-      selected: false
-    }, {
-      id: 'addon-3',
-      name: 'Content Creation',
-      description: 'Professional copywriting for up to 5 pages',
-      price: 199,
-      selected: false
-    }, {
-      id: 'addon-4',
-      name: 'Analytics Setup',
-      description: 'Google Analytics and reporting dashboard setup',
-      price: 79,
-      selected: false
-    }, {
-      id: 'addon-5',
-      name: 'Extended Support',
-      description: 'Additional 30 days of technical support',
-      price: 129,
-      selected: false
-    }]);
-    setIsLoading(false);
-  }, [navigate]);
+  };
   const toggleAddOn = (id: string) => {
     setAddOns(addOns.map(addon => addon.id === id ? {
       ...addon,
