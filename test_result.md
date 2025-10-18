@@ -837,16 +837,15 @@ files generated
 
 #### 📊 DETAILED TEST RESULTS:
 
-**Console Log Analysis:**
+**Console Log Analysis - FIXED VERSION:**
 ```
 ✅ Starting invitation process for: test@example.com
-✅ Access code created: D8QJN9W2  
-✅ Preparing invitation email: {to: test@example.com, templateId: template_qxzhzwl, accessCode: D8QJ...}
-✅ EmailJS template parameters: [user_name, user_email, access_code, inviter_name, app_url, to_name, to_email, from_name, message, subject]
+✅ Access code created: UX7HEC3O  
+✅ Preparing invitation email: {to: test@example.com, templateId: template_qxzhzwl, accessCode: UX7H...}
+✅ EmailJS template parameters: [name, email, message, user_name, user_email, access_code, inviter_name, subject]
 ✅ Sending email with config: {serviceId: service_2mlk78j, templateId: template_qxzhzwl, userId: 9ZbOjkM6..., recipientEmail: test@example.com}
-❌ Failed to load resource: the server responded with a status of 422 ()
-❌ Failed to send email: EmailJSResponseStatus
-❌ Error sending invitation: Error: Email sending failed
+✅ Email sent successfully! {status: 200, text: OK, recipient: test@example.com}
+✅ User invited successfully
 ```
 
 **Network Request Analysis:**
