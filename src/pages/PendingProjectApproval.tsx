@@ -316,5 +316,19 @@ export function PendingProjectApproval() {
           </div>
         </div>
       </div>
+
+      {/* Add-ons Selection Modal */}
+      {pendingProject && (
+        <AddOnsSelectionModal
+          isOpen={showAddOnsModal}
+          onClose={() => setShowAddOnsModal(false)}
+          onConfirm={handleAddOnsConfirm}
+          basePrice={pendingProject.customPrice || pendingProject.servicePackage.price}
+          baseDeliveryTime={14} // Default base delivery time
+          projectName={pendingProject.name}
+          initialSelectedAddOns={selectedAddOns}
+          initialAppliedCoupon={appliedCoupon}
+        />
+      )}
     </div>;
 }
