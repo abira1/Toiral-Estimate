@@ -34,19 +34,24 @@ export function LoginPage() {
   };
   return <div className="min-h-screen bg-gradient-to-br from-lavender to-cream-light flex flex-col">
       {/* Navbar */}
-      <nav className="py-4 px-6 md:px-10 flex justify-between items-center">
-        <div className="flex items-center gap-2">
-          <div className="h-10 w-10 bg-white rounded-lg flex items-center justify-center p-1">
-            <img src="/toiraal.png" alt="Toiral Logo" className="h-full w-full object-contain" />
+      <header>
+        <nav className="py-4 px-6 md:px-10 flex justify-between items-center" role="navigation" aria-label="Main navigation">
+          <div className="flex items-center gap-2">
+            <div className="h-10 w-10 bg-white rounded-lg flex items-center justify-center p-1">
+              <img src="/toiraal.png" alt="Toiral Logo" className="h-full w-full object-contain" />
+            </div>
+            <span className="font-bold text-xl text-primary-800">Toiral</span>
           </div>
-          <span className="font-bold text-xl text-primary-800">Toiral</span>
-        </div>
-        <button className="px-4 py-2 text-sm border-2 border-primary-600 text-primary-600 rounded-lg hover:bg-primary-50 transition-colors">
-          Contact Us
-        </button>
-      </nav>
+          <button 
+            className="px-4 py-2 text-sm border-2 border-primary-600 text-primary-600 rounded-lg hover:bg-primary-50 transition-colors focus:ring-2 focus:ring-primary-500 focus:outline-none" 
+            aria-label="Contact us for support or questions"
+          >
+            Contact Us
+          </button>
+        </nav>
+      </header>
       {/* Hero Section */}
-      <div className="flex-1 flex flex-col md:flex-row px-6 md:px-10 py-12 md:py-20">
+      <main className="flex-1 flex flex-col md:flex-row px-6 md:px-10 py-12 md:py-20">
         <div className="md:w-1/2 flex flex-col justify-center">
           <h1 className="text-4xl md:text-5xl font-bold text-primary-800 mb-4">
             Estimate your website cost with{' '}
