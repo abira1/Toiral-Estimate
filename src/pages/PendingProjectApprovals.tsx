@@ -32,7 +32,7 @@ interface PendingProjectItem {
 
 export function PendingProjectApprovals() {
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const { currentUser, userProfile } = useAuth();
   const [pendingItems, setPendingItems] = useState<PendingProjectItem[]>([]);
   const [loading, setLoading] = useState(true);
 
