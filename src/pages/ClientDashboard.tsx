@@ -51,7 +51,7 @@ export function ClientDashboard() {
       }
 
       // Load dashboard data from workflow system
-      const data = await getClientDashboardData(user.id);
+      const data = await getClientDashboardData(currentUser.uid);
       setDashboardData(data);
 
       // Check for pending project setup
