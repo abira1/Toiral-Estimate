@@ -1,0 +1,218 @@
+{
+  "total_tests": 13,
+  "passed_tests": 10,
+  "failed_tests": 3,
+  "success_rate": 76.92307692307693,
+  "test_results": [
+    {
+      "test": "Frontend Application Access",
+      "status": "PASS",
+      "details": "Application accessible at http://localhost:3000",
+      "error": "",
+      "timestamp": "2025-10-18T17:06:15.525827"
+    },
+    {
+      "test": "Workflow Service Functions",
+      "status": "PASS",
+      "details": "All 12 essential workflow functions found",
+      "error": "",
+      "timestamp": "2025-10-18T17:06:16.026141"
+    },
+    {
+      "test": "Workflow TypeScript Interfaces",
+      "status": "FAIL",
+      "details": "Missing interfaces: Client, ProjectSetup, ProjectAddOn, Coupon, ClientQuotation, RunningProject, WorkflowStatus, ClientDashboardData, AdminDashboardData",
+      "error": "",
+      "timestamp": "2025-10-18T17:06:16.026299"
+    },
+    {
+      "test": "Workflow Types Definition",
+      "status": "PASS",
+      "details": "All 10 essential types defined",
+      "error": "",
+      "timestamp": "2025-10-18T17:06:16.526518"
+    },
+    {
+      "test": "Workflow Types Field Validation",
+      "status": "PASS",
+      "details": "All essential fields present in key interfaces",
+      "error": "",
+      "timestamp": "2025-10-18T17:06:16.526561"
+    },
+    {
+      "test": "Client Dashboard Features",
+      "status": "PASS",
+      "details": "All 7 essential features found",
+      "error": "",
+      "timestamp": "2025-10-18T17:06:17.026800"
+    },
+    {
+      "test": "Client Dashboard State Management",
+      "status": "PASS",
+      "details": "Proper React state management implemented",
+      "error": "",
+      "timestamp": "2025-10-18T17:06:17.026834"
+    },
+    {
+      "test": "Pending Approvals Features",
+      "status": "PASS",
+      "details": "All 6 essential features found",
+      "error": "",
+      "timestamp": "2025-10-18T17:06:17.526996"
+    },
+    {
+      "test": "Pending Approvals Navigation",
+      "status": "PASS",
+      "details": "Proper navigation handling implemented",
+      "error": "",
+      "timestamp": "2025-10-18T17:06:17.527032"
+    },
+    {
+      "test": "Project Approval Details Features",
+      "status": "PASS",
+      "details": "All 9 essential features found",
+      "error": "",
+      "timestamp": "2025-10-18T17:06:18.027274"
+    },
+    {
+      "test": "Project Approval Real-time Pricing",
+      "status": "PASS",
+      "details": "Real-time pricing calculations implemented",
+      "error": "",
+      "timestamp": "2025-10-18T17:06:18.027314"
+    },
+    {
+      "test": "Add-ons Selection Modal Features",
+      "status": "PASS",
+      "details": "All 11 essential features found",
+      "error": "",
+      "timestamp": "2025-10-18T17:06:18.527565"
+    },
+    {
+      "test": "Add-ons Real-time Pricing Updates",
+      "status": "PASS",
+      "details": "Real-time pricing updates implemented",
+      "error": "",
+      "timestamp": "2025-10-18T17:06:18.527604"
+    },
+    {
+      "test": "Final Quotation Review Features",
+      "status": "PASS",
+      "details": "All 8 essential features found",
+      "error": "",
+      "timestamp": "2025-10-18T17:06:19.027822"
+    },
+    {
+      "test": "Final Quotation Data Flow",
+      "status": "PASS",
+      "details": "Proper data flow handling implemented",
+      "error": "",
+      "timestamp": "2025-10-18T17:06:19.027856"
+    },
+    {
+      "test": "Dynamic Pricing - Base Price",
+      "status": "PASS",
+      "details": "Base price calculation: $2500",
+      "error": "",
+      "timestamp": "2025-10-18T17:06:19.527956"
+    },
+    {
+      "test": "Dynamic Pricing - Add-ons Calculation",
+      "status": "PASS",
+      "details": "Subtotal with add-ons: $2998",
+      "error": "",
+      "timestamp": "2025-10-18T17:06:19.527989"
+    },
+    {
+      "test": "Dynamic Pricing - Percentage Discount",
+      "status": "PASS",
+      "details": "Final price with 10% discount: $2698.20",
+      "error": "",
+      "timestamp": "2025-10-18T17:06:19.528001"
+    },
+    {
+      "test": "Dynamic Pricing - Fixed Discount",
+      "status": "PASS",
+      "details": "Final price with $50 discount: $2948",
+      "error": "",
+      "timestamp": "2025-10-18T17:06:19.528006"
+    },
+    {
+      "test": "Dynamic Pricing - Delivery Time Calculation",
+      "status": "PASS",
+      "details": "Total delivery time: 38 days",
+      "error": "",
+      "timestamp": "2025-10-18T17:06:19.528012"
+    },
+    {
+      "test": "Coupon System - Percentage Discount",
+      "status": "PASS",
+      "details": "Percentage discount calculated correctly: $100.0",
+      "error": "",
+      "timestamp": "2025-10-18T17:06:20.028115"
+    },
+    {
+      "test": "Coupon System - Fixed Discount",
+      "status": "PASS",
+      "details": "Fixed discount validated: $50",
+      "error": "",
+      "timestamp": "2025-10-18T17:06:20.028154"
+    },
+    {
+      "test": "Coupon System - Minimum Order Validation",
+      "status": "PASS",
+      "details": "Minimum order validation working: $50 < $100",
+      "error": "",
+      "timestamp": "2025-10-18T17:06:20.028161"
+    },
+    {
+      "test": "Coupon System Validation",
+      "status": "FAIL",
+      "details": "",
+      "error": "can't compare offset-naive and offset-aware datetimes",
+      "timestamp": "2025-10-18T17:06:20.028179"
+    },
+    {
+      "test": "Seed Data Service Functions",
+      "status": "PASS",
+      "details": "All 5 essential functions found",
+      "error": "",
+      "timestamp": "2025-10-18T17:06:20.528371"
+    },
+    {
+      "test": "Seed Data Structure",
+      "status": "PASS",
+      "details": "Proper test data structure implemented",
+      "error": "",
+      "timestamp": "2025-10-18T17:06:20.528406"
+    },
+    {
+      "test": "Phase 5 Routes Definition",
+      "status": "PASS",
+      "details": "All 4 Phase 5 routes defined",
+      "error": "",
+      "timestamp": "2025-10-18T17:06:21.028612"
+    },
+    {
+      "test": "Phase 5 Component Imports",
+      "status": "PASS",
+      "details": "All Phase 5 components properly imported",
+      "error": "",
+      "timestamp": "2025-10-18T17:06:21.028642"
+    },
+    {
+      "test": "Firebase Configuration",
+      "status": "PASS",
+      "details": "Firebase properly configured for Phase 5",
+      "error": "",
+      "timestamp": "2025-10-18T17:06:21.528829"
+    },
+    {
+      "test": "Firebase Workflow Integration",
+      "status": "FAIL",
+      "details": "Firebase not properly integrated in workflow service",
+      "error": "",
+      "timestamp": "2025-10-18T17:06:21.528898"
+    }
+  ]
+}
