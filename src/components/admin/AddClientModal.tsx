@@ -59,16 +59,26 @@ export function AddClientModal({ isOpen, onClose, onClientAdded }: AddClientModa
     setIsLoading(true);
     
     try {
-      const clientData = {
+      const clientData: any = {
         name: formData.name.trim(),
         email: formData.email.trim(),
         phone: formData.phone.trim(),
-        profileImage: formData.profileImage.trim() || undefined,
-        selectedPackage: formData.selectedPackage || undefined,
-        additionalNotes: formData.additionalNotes.trim() || undefined,
-        projectDetails: formData.projectDetails.trim() || undefined,
         createdBy: currentUser.uid
       };
+
+      // Only add optional fields if they have values (avoid undefined)
+      if (formData.profileImage.trim()) {
+        clientData.profileImage = formData.profileImage.trim();
+      }
+      if (formData.selectedPackage) {
+        clientData.selectedPackage = formData.selectedPackage;
+      }
+      if (formData.additionalNotes.trim()) {
+        clientData.additionalNotes = formData.additionalNotes.trim();
+      }
+      if (formData.projectDetails.trim()) {
+        clientData.projectDetails = formData.projectDetails.trim();
+      }
 
       const client = await createClient(clientData);
       
