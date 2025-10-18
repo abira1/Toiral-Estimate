@@ -135,10 +135,21 @@ export const sendInvitationEmail = async (
     accessCode: accessCode.substring(0, 4) + '...'
   });
 
-  return await sendEmail(templateId, {
-    to_email: userEmail,
+  // Try different parameter naming conventions that EmailJS templates commonly use
+  const templateParams = {
+    // Standard EmailJS parameter names
+    user_name: userName,
+    user_email: userEmail,
+    access_code: accessCode,
+    inviter_name: inviterName,
+    app_url: typeof window !== 'undefined' ? window.location.origin : 'http://localhost:3001',
+    
+    // Alternative parameter names (common in EmailJS templates)
     to_name: userName,
-    subject: 'Welcome to Toiral - Your Access Code',
+    to_email: userEmail,
+    from_name: 'Toiral Web Development',
+    
+    // Message content
     message: `Dear ${userName},
 
 You have been invited to join Toiral Estimate by ${inviterName}.
@@ -146,7 +157,7 @@ You have been invited to join Toiral Estimate by ${inviterName}.
 Your access code is: ${accessCode}
 
 To get started:
-1. Visit: ${typeof window !== 'undefined' ? window.location.origin : 'https://your-domain.com'}
+1. Visit: ${typeof window !== 'undefined' ? window.location.origin : 'http://localhost:3001'}
 2. Enter your access code: ${accessCode}
 3. Start creating quotations and managing projects
 
@@ -156,8 +167,47 @@ Welcome to Toiral!
 
 Best regards,
 Toiral Team`,
-    from_name: 'Toiral Web Development'
-  });
+    
+    // Additional common template variables
+    subject: 'Welcome to Toiral - Your Access Code'
+  };
+
+  console.log('EmailJS template parameters:', Object.keys(templateParams));
+
+  try {
+    // Validate EmailJS configuration
+    if (!EMAILJS_SERVICE_ID || !EMAILJS_USER_ID) {
+      console.error('EmailJS configuration missing:', {
+        serviceId: !!EMAILJS_SERVICE_ID,
+        userId: !!EMAILJS_USER_ID,
+        templateId: !!templateId
+      });
+      throw new Error('EmailJS configuration is incomplete');
+    }
+
+    console.log('Sending email with config:', {
+      serviceId: EMAILJS_SERVICE_ID,
+      templateId,
+      userId: EMAILJS_USER_ID?.substring(0, 8) + '...',
+      recipientEmail: userEmail
+    });
+
+    const response = await emailjs.send(
+      EMAILJS_SERVICE_ID,
+      templateId,
+      templateParams,
+      EMAILJS_USER_ID
+    );
+    
+    console.log('Email sent successfully:', response.status, response.text);
+    return true;
+  } catch (error) {
+    console.error('Failed to send email:', error);
+    if (error instanceof Error) {
+      console.error('Error details:', error.message);
+    }
+    return false;
+  }
 };
 
 // Admin notification
