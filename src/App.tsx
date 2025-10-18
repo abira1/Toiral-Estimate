@@ -42,7 +42,7 @@ export function App() {
                 <MyQuotations />
               </ProtectedRoute>} />
           <Route path="/services" element={<ProtectedRoute>
-                <ServicesPage />
+                <ServicesPageNew />
               </ProtectedRoute>} />
           <Route path="/final-quotation" element={<ProtectedRoute>
                 <FinalQuotationPage />
