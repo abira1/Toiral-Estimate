@@ -59,10 +59,27 @@ export function AdminDashboard() {
         <p className="text-gray-600">Overview of your business metrics</p>
       </div>
       
-      {/* Seed Data Button */}
-      <div className="mb-6">
+      {/* Admin Actions */}
+      <div className="mb-6 flex flex-wrap gap-4">
         <SeedDataButton />
+        <button
+          onClick={() => setIsInviteModalOpen(true)}
+          className="px-6 py-3 bg-secondary-600 text-white rounded-xl hover:bg-secondary-700 transition-colors flex items-center gap-2 shadow-retro"
+        >
+          <UserPlusIcon size={18} />
+          Invite User
+        </button>
       </div>
+
+      {/* Invite User Modal */}
+      <InviteUserModal 
+        isOpen={isInviteModalOpen}
+        onClose={() => setIsInviteModalOpen(false)}
+        onInviteSent={() => {
+          // Refresh data or show success message
+          console.log('User invited successfully');
+        }}
+      />
       
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
