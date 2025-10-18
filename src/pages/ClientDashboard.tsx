@@ -28,7 +28,7 @@ interface DashboardStats {
 
 export function ClientDashboard() {
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const { currentUser, userProfile } = useAuth();
   const [dashboardData, setDashboardData] = useState<ClientDashboardData | null>(null);
   const [pendingProjectSetup, setPendingProjectSetup] = useState<ProjectSetup | null>(null);
   const [loading, setLoading] = useState(true);
