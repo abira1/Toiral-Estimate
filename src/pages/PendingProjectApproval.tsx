@@ -27,7 +27,7 @@ type PendingProject = {
 };
 export function PendingProjectApproval() {
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const { currentUser, userProfile } = useAuth();
   const [pendingProject, setPendingProject] = useState<PendingProject | null>(null);
   const [projectSetup, setProjectSetup] = useState<ProjectSetup | null>(null);
   const [selectedAddOns, setSelectedAddOns] = useState<ProjectAddOn[]>([]);
