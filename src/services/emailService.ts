@@ -126,7 +126,16 @@ export const sendInvitationEmail = async (
   accessCode: string,
   inviterName: string = 'Toiral Admin'
 ) => {
-  return await sendEmail(EMAILJS_TEMPLATE_ID, {
+  // Use the configured template ID from environment
+  const templateId = EMAILJS_TEMPLATE_ID || 'template_qxzhzwl';
+  
+  console.log('Preparing invitation email:', {
+    to: userEmail,
+    templateId,
+    accessCode: accessCode.substring(0, 4) + '...'
+  });
+
+  return await sendEmail(templateId, {
     to_email: userEmail,
     to_name: userName,
     subject: 'Welcome to Toiral - Your Access Code',
@@ -137,7 +146,7 @@ You have been invited to join Toiral Estimate by ${inviterName}.
 Your access code is: ${accessCode}
 
 To get started:
-1. Visit: ${window.location.origin}
+1. Visit: ${typeof window !== 'undefined' ? window.location.origin : 'https://your-domain.com'}
 2. Enter your access code: ${accessCode}
 3. Start creating quotations and managing projects
 
