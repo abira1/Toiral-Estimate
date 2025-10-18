@@ -42,6 +42,8 @@ export function FinalQuotationPage() {
     const storedServices = JSON.parse(localStorage.getItem('servicePackages') || '[]');
     setServicePackages(storedServices);
     
+    let dataLoaded = false;
+    
     // First try to load from new quotationSelection format
     const quotationSelection = localStorage.getItem('quotationSelection');
     if (quotationSelection) {
@@ -49,6 +51,7 @@ export function FinalQuotationPage() {
         const selectionData = JSON.parse(quotationSelection);
         if (selectionData.package) {
           setSelectedPackage(selectionData.package);
+          dataLoaded = true;
         }
         if (selectionData.addOns && Array.isArray(selectionData.addOns)) {
           // Convert add-ons to the expected format
@@ -66,23 +69,30 @@ export function FinalQuotationPage() {
     }
     
     // Fallback to old format for backward compatibility
-    const packageId = localStorage.getItem('selectedPackageId');
-    if (packageId) {
-      const foundPackage = storedServices.find((pkg: ServicePackage) => pkg.id === packageId);
-      if (foundPackage) {
-        setSelectedPackage(foundPackage);
-        console.log('✅ Loaded package from legacy format:', foundPackage);
+    if (!dataLoaded) {
+      const packageId = localStorage.getItem('selectedPackageId');
+      if (packageId) {
+        const foundPackage = storedServices.find((pkg: ServicePackage) => pkg.id === packageId);
+        if (foundPackage) {
+          setSelectedPackage(foundPackage);
+          dataLoaded = true;
+          console.log('✅ Loaded package from legacy format:', foundPackage);
+        }
+      }
+      
+      // Load selected add-ons from old format
+      const addOns = JSON.parse(localStorage.getItem('selectedAddOns') || '[]');
+      if (addOns.length > 0) {
+        setSelectedAddOns(addOns);
       }
     }
     
-    // Load selected add-ons from old format
-    const addOns = JSON.parse(localStorage.getItem('selectedAddOns') || '[]');
-    setSelectedAddOns(addOns);
-    
     // If no data found in either format, show warning
-    if (!quotationSelection && !packageId) {
+    if (!dataLoaded) {
       console.warn('⚠️ No package selection found. User may need to select a service package first.');
-      toast.error('No service package selected. Please select a package from Services page first.');
+      toast.error('No service package selected. Please select a package from Services page first.', {
+        duration: 5000
+      });
     }
   }, []);
   const calculateSubtotal = () => {
