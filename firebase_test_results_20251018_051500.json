@@ -1,0 +1,100 @@
+{
+  "total_tests": 10,
+  "passed_tests": 2,
+  "failed_tests": 7,
+  "partial_tests": 1,
+  "success_rate": 20.0,
+  "test_results": [
+    {
+      "test": "Firebase Connectivity",
+      "status": "FAIL",
+      "details": "HTTP 401: {\n  \"error\" : \"Permission denied\"\n}\n",
+      "error": "",
+      "timestamp": "2025-10-18T05:14:44.984699"
+    },
+    {
+      "test": "User Creation",
+      "status": "FAIL",
+      "details": "HTTP 401: {\n  \"error\" : \"Permission denied\"\n}\n",
+      "error": "",
+      "timestamp": "2025-10-18T05:14:46.419236"
+    },
+    {
+      "test": "Service Package Creation",
+      "status": "FAIL",
+      "details": "HTTP 401: {\n  \"error\" : \"Permission denied\"\n}\n",
+      "error": "",
+      "timestamp": "2025-10-18T05:14:47.845237"
+    },
+    {
+      "test": "Quotation Creation",
+      "status": "FAIL",
+      "details": "HTTP 401: {\n  \"error\" : \"Permission denied\"\n}\n",
+      "error": "",
+      "timestamp": "2025-10-18T05:14:49.286025"
+    },
+    {
+      "test": "Access Code Generation",
+      "status": "FAIL",
+      "details": "HTTP 401: {\n  \"error\" : \"Permission denied\"\n}\n",
+      "error": "",
+      "timestamp": "2025-10-18T05:14:50.741635"
+    },
+    {
+      "test": "EmailJS Configuration",
+      "status": "PASS",
+      "details": "EmailJS credentials configured: Service ID, Template ID, User ID",
+      "error": "",
+      "timestamp": "2025-10-18T05:14:51.742364"
+    },
+    {
+      "test": "Email Template Parameters",
+      "status": "PASS",
+      "details": "Email template parameters validated",
+      "error": "",
+      "timestamp": "2025-10-18T05:14:51.742401"
+    },
+    {
+      "test": "Email Service Integration",
+      "status": "PASS",
+      "details": "EmailJS integration configured correctly (actual sending not tested)",
+      "error": "",
+      "timestamp": "2025-10-18T05:14:51.742409"
+    },
+    {
+      "test": "Complete Data Flow Workflow",
+      "status": "PARTIAL",
+      "details": "0/4 workflow steps completed",
+      "error": "",
+      "timestamp": "2025-10-18T05:14:53.165810"
+    },
+    {
+      "test": "Firebase Monitoring",
+      "status": "PASS",
+      "details": "Statistics collected: {'users': 0, 'quotations': 0, 'services': 0, 'access-codes': 0, 'analytics': 0, 'data_size_mb': 0}",
+      "error": "",
+      "timestamp": "2025-10-18T05:14:56.755873"
+    },
+    {
+      "test": "Analytics Data Storage",
+      "status": "FAIL",
+      "details": "HTTP 401",
+      "error": "",
+      "timestamp": "2025-10-18T05:14:57.180636"
+    },
+    {
+      "test": "Final Quotation Pricing - Valid Case",
+      "status": "FAIL",
+      "details": "HTTP 401: {\n  \"error\" : \"Permission denied\"\n}\n",
+      "error": "",
+      "timestamp": "2025-10-18T05:14:58.629563"
+    },
+    {
+      "test": "Test Data Cleanup",
+      "status": "PASS",
+      "details": "Cleaned up 0/0 test records",
+      "error": "",
+      "timestamp": "2025-10-18T05:14:59.630391"
+    }
+  ]
+}
