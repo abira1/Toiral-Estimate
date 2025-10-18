@@ -20,25 +20,55 @@ import { SearchModal } from './components/SearchModal';
 import { KeyboardShortcutsModal } from './components/KeyboardShortcutsModal';
 import { useKeyboardShortcuts, KeyboardShortcut } from './hooks/useKeyboardShortcuts';
 
-export function App() {
+function AppWithKeyboardShortcuts() {
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isShortcutsOpen, setIsShortcutsOpen] = useState(false);
+
+  const shortcuts: KeyboardShortcut[] = [
+    {
+      key: 'k',
+      ctrlKey: true,
+      action: () => setIsSearchOpen(true),
+      description: 'Open search'
+    },
+    {
+      key: 'k',
+      metaKey: true,
+      action: () => setIsSearchOpen(true),
+      description: 'Open search'
+    },
+    {
+      key: 'Escape',
+      action: () => {
+        setIsSearchOpen(false);
+        setIsShortcutsOpen(false);
+      },
+      description: 'Close modals'
+    },
+    {
+      key: '?',
+      action: () => setIsShortcutsOpen(true),
+      description: 'Show keyboard shortcuts'
+    }
+  ];
+
+  useKeyboardShortcuts(shortcuts);
+
   return (
-    <ErrorBoundary>
-      <DataInitializer>
-        <AuthProvider>
-          <BrowserRouter>
-          <Toaster 
-            position="top-right"
-            toastOptions={{
-              duration: 3000,
-              style: {
-                background: '#fff',
-                color: '#363636',
-                borderRadius: '12px',
-                border: '2px solid #e5e7eb',
-              },
-            }}
-          />
-          <Routes>
+    <>
+      <Toaster 
+        position="top-right"
+        toastOptions={{
+          duration: 3000,
+          style: {
+            background: '#fff',
+            color: '#363636',
+            borderRadius: '12px',
+            border: '2px solid #e5e7eb',
+          },
+        }}
+      />
+      <Routes>
             <Route path="/" element={<LoginPage />} />
             <Route path="/dashboard" element={<ProtectedRoute>
                   <Dashboard />
