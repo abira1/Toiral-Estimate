@@ -231,9 +231,9 @@ export function Dashboard() {
                     View all projects
                   </button>
                 </div>
-              </div>
+              </section>
               {/* Contact Information */}
-              <div className="bg-white rounded-2xl shadow-retro border border-gray-200 p-4 sm:p-6">
+              <section className="bg-white rounded-2xl shadow-retro border border-gray-200 p-4 sm:p-6" aria-labelledby="contact-heading">
                 <h2 className="text-xl font-semibold mb-4 text-gray-800">
                   Contact Us
                 </h2>
