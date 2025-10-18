@@ -74,7 +74,31 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const loginWithAccessCode = async (code: string) => {
-    // For demo purposes, use anonymous auth with stored access code
+    // Check if this is a known test user access code
+    if (isTestUserAccessCode(code)) {
+      const testUserInfo = getTestUserInfo(code);
+      
+      if (testUserInfo) {
+        // Use anonymous auth
+        const userCredential = await signInAnonymously(auth);
+        
+        // Get the pre-created user profile by searching for it
+        const allUsers = await getAllUsers();
+        const profile = allUsers.find(u => 
+          u.email === testUserInfo.email || 
+          u.name === testUserInfo.name
+        );
+        
+        if (profile) {
+          setUserProfile(profile);
+          // Update last active time
+          await updateUser(profile.id, { lastActive: new Date().toISOString() });
+          return;
+        }
+      }
+    }
+    
+    // Fallback: Create a new user for unknown access codes
     const userCredential = await signInAnonymously(auth);
     const userId = userCredential.user.uid;
     
