@@ -1,10 +1,9 @@
 import emailjs from '@emailjs/browser';
 
 // EmailJS configuration
-// You'll need to create an account at https://www.emailjs.com/
-// and get your SERVICE_ID, TEMPLATE_ID, and USER_ID
-const EMAILJS_SERVICE_ID = 'service_toiral'; // Replace with your service ID
-const EMAILJS_USER_ID = 'your_public_key'; // Replace with your public key
+const EMAILJS_SERVICE_ID = 'service_2mlk78j';
+const EMAILJS_TEMPLATE_ID = 'template_qxzhzwl';
+const EMAILJS_USER_ID = '9ZbOjkM6PYbYC33Lh';
 
 interface EmailData {
   to_email: string;
