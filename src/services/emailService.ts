@@ -99,15 +99,46 @@ export const sendProjectMilestoneEmail = async (
   });
 };
 
+// Send invitation email with access code
+export const sendInvitationEmail = async (
+  userEmail: string,
+  userName: string,
+  accessCode: string,
+  inviterName: string = 'Toiral Admin'
+) => {
+  return await sendEmail(EMAILJS_TEMPLATE_ID, {
+    to_email: userEmail,
+    to_name: userName,
+    subject: 'Welcome to Toiral - Your Access Code',
+    message: `Dear ${userName},
+
+You have been invited to join Toiral Estimate by ${inviterName}.
+
+Your access code is: ${accessCode}
+
+To get started:
+1. Visit: ${window.location.origin}
+2. Enter your access code: ${accessCode}
+3. Start creating quotations and managing projects
+
+This access code expires in 7 days for security reasons.
+
+Welcome to Toiral!
+
+Best regards,
+Toiral Team`,
+    from_name: 'Toiral Web Development'
+  });
+};
+
 // Admin notification
 export const sendAdminNotification = async (
   subject: string,
   message: string
 ) => {
-  const templateId = 'template_admin_notification';
   const adminEmail = 'admin@toiral.com'; // Replace with actual admin email
   
-  return await sendEmail(templateId, {
+  return await sendEmail(EMAILJS_TEMPLATE_ID, {
     to_email: adminEmail,
     to_name: 'Admin',
     subject,
