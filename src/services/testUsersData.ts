@@ -265,9 +265,9 @@ export const initializeTestUsers = async () => {
         phone: '+1 (555) 123-4567'
       },
       servicePackage: services[3], // Complete Website Package
-      addOns: [sampleAddOns[0], sampleAddOns[2]], // E-commerce + SEO
+      addOns: services[3].addOns ? [services[3].addOns[0], services[3].addOns[3]] : [], // E-commerce + Advanced SEO
       discount: 10,
-      totalPrice: 1390, // 1200 + 200 + 100 - 10% discount
+      totalPrice: 1485, // 1200 + 400 + 250 - 10% discount
       status: 'approved',
       createdAt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(), // 7 days ago
       updatedAt: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString()
@@ -282,9 +282,9 @@ export const initializeTestUsers = async () => {
         phone: '+1 (555) 123-4567'
       },
       servicePackage: services[1], // Web Design Standard
-      addOns: [sampleAddOns[2]], // SEO
+      addOns: services[1].addOns ? [services[1].addOns[0]] : [], // Extra Pages
       discount: 5,
-      totalPrice: 237.5, // 150 + 100 - 5% discount
+      totalPrice: 213.75, // 150 + 75 - 5% discount
       status: 'sent',
       createdAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
       updatedAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString()
