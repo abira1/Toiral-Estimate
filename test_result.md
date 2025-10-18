@@ -2,6 +2,21 @@
 
 ## Summary of Changes
 
+### ✅ LATEST FIX (2025-01-18)
+
+**🐛 AUTHENTICATION BUG FIX - "Add New Client" Issue RESOLVED**
+- **Issue**: "You must be logged in to add a client" error when admin tries to add new clients
+- **Root Cause**: AuthContext was exporting `currentUser` and `userProfile`, but AddClientModal was trying to access non-existent `user` property
+- **Fix Applied**: Updated AddClientModal.tsx and 6 other components to use correct auth properties (`currentUser` and `userProfile`)
+- **Status**: ✅ **COMPLETELY FIXED** - Verified by frontend testing agent
+- **Files Modified**: 
+  - `/src/components/admin/AddClientModal.tsx`
+  - `/src/pages/FinalQuotationReview.tsx`
+  - `/src/pages/PendingProjectApprovals.tsx`
+  - `/src/pages/ProjectApprovalDetails.tsx`
+  - `/src/pages/PendingProjectApproval.tsx`
+  - `/src/pages/ClientDashboard.tsx`
+
 ### ✅ Completed Tasks
 
 1. **Test User Access Codes Created**
