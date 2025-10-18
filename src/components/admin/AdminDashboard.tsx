@@ -129,6 +129,11 @@ export function AdminDashboard() {
           <p className="text-sm text-gray-500 mt-2">Potential revenue</p>
         </div>
       </div>
+      {/* Firebase Monitoring */}
+      <div className="mb-8">
+        <FirebaseMonitor />
+      </div>
+
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Recent Quotations */}
         <div className="lg:col-span-2 bg-white rounded-2xl shadow-retro border border-gray-200 p-6">
