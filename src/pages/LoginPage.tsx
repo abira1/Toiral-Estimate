@@ -52,8 +52,8 @@ export function LoginPage() {
       </header>
       {/* Hero Section */}
       <main className="flex-1 flex flex-col md:flex-row px-6 md:px-10 py-12 md:py-20">
-        <div className="md:w-1/2 flex flex-col justify-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-primary-800 mb-4">
+        <section className="md:w-1/2 flex flex-col justify-center" aria-labelledby="hero-heading">
+          <h1 id="hero-heading" className="text-4xl md:text-5xl font-bold text-primary-800 mb-4">
             Estimate your website cost with{' '}
             <span className="text-secondary-600">Toiral</span>
           </h1>
@@ -61,17 +61,33 @@ export function LoginPage() {
             Build custom quotations for your web development needs with our
             intuitive quotation builder.
           </p>
-          <form onSubmit={handleLogin} className="max-w-md w-full">
-            <div className="border-2 border-gray-300 rounded-xl p-2 flex flex-wrap sm:flex-nowrap overflow-hidden bg-white shadow-retro mb-4">
-              <div className="bg-gray-100 p-2 rounded-lg mr-2">
+          <form onSubmit={handleLogin} className="max-w-md w-full" aria-label="Login form">
+            <fieldset className="border-2 border-gray-300 rounded-xl p-2 flex flex-wrap sm:flex-nowrap overflow-hidden bg-white shadow-retro mb-4">
+              <legend className="sr-only">Access Code Login</legend>
+              <div className="bg-gray-100 p-2 rounded-lg mr-2" aria-hidden="true">
                 <LockIcon className="text-gray-500" size={20} />
               </div>
-              <input type="text" placeholder="Enter access code (e.g., 'admin' or 'testuser1')" className="flex-1 outline-none text-gray-800 min-w-0 w-full" value={accessCode} onChange={e => setAccessCode(e.target.value)} />
-              <button type="submit" disabled={isLoading} className="bg-primary-600 text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-primary-700 transition-colors mt-2 sm:mt-0 w-full sm:w-auto">
-                {isLoading ? 'Logging in...' : 'Login'}
-                {!isLoading && <ArrowRightIcon size={16} />}
+              <label htmlFor="access-code" className="sr-only">Access Code</label>
+              <input 
+                id="access-code"
+                type="text" 
+                placeholder="Enter access code (e.g., 'admin' or 'testuser1')" 
+                className="flex-1 outline-none text-gray-800 min-w-0 w-full focus:ring-2 focus:ring-primary-500 focus:outline-none" 
+                value={accessCode} 
+                onChange={e => setAccessCode(e.target.value)}
+                aria-describedby="access-code-help"
+                required
+              />
+              <button 
+                type="submit" 
+                disabled={isLoading} 
+                className="bg-primary-600 text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-primary-700 disabled:opacity-50 transition-colors mt-2 sm:mt-0 w-full sm:w-auto focus:ring-2 focus:ring-primary-500 focus:outline-none"
+                aria-describedby="login-status"
+              >
+                <span>{isLoading ? 'Logging in...' : 'Login'}</span>
+                {!isLoading && <ArrowRightIcon size={16} aria-hidden="true" />}
               </button>
-            </div>
+            </fieldset>
             <p className="text-sm text-gray-500 mt-2">
               <strong>Test Access Codes:</strong><br />
               • <strong>admin</strong> - Admin panel access<br />
