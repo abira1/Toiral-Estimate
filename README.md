@@ -60,27 +60,83 @@ The application will be available at `http://localhost:3000`
 2. Click "Seed Test Data" button on dashboard
 3. Sample data will populate automatically
 
-## 🚀 How to Use
+## 🎯 Accessibility Features
 
-### Step 1: Login as Admin
-1. Go to http://localhost:3000
-2. Enter access code: `admin`
-3. Click "Login"
-4. You'll be taken to the Admin Dashboard
+### Keyboard Navigation
+- **Tab Navigation**: Navigate through all interactive elements
+- **Focus Indicators**: Clear visual focus states on all controls
+- **Skip Links**: Jump to main content areas
+- **Arrow Key Support**: Navigate through search results and lists
 
-### Step 2: Seed Test Data (One-Time Setup)
-1. On the Admin Dashboard, you'll see an "Initialize Test Data" card
-2. Click the blue "Seed Test Data" button
-3. Wait a few seconds for the data to be created
-4. You'll see a success message when done
+### Screen Reader Support
+- **Semantic HTML**: Proper heading hierarchy (`<h1>` to `<h6>`)
+- **ARIA Labels**: Descriptive labels for all interactive elements
+- **Landmark Roles**: `<nav>`, `<main>`, `<aside>`, `<section>` elements
+- **Live Regions**: Dynamic content announcements
 
-**Note:** If you get a "Permission Denied" error, see the Firebase Rules section below.
+### Mobile Accessibility
+- **Touch Targets**: Minimum 44px size for all interactive elements
+- **Responsive Navigation**: Bottom navigation bar on mobile devices
+- **Zoom Support**: Works properly up to 200% zoom level
+- **No Horizontal Scroll**: Content adapts to all screen sizes
 
-### Step 3: Test Client Logins
-After seeding data, log out and try these test users:
-- Login with `testuser1` to see an active user with projects
-- Login with `testuser2` to see a new user with draft quotations
-- Login with `testuser3` to see a user with completed projects
+### Keyboard Shortcuts
+| Shortcut | Action |
+|----------|--------|
+| `Ctrl/Cmd + K` | Open smart search modal |
+| `Esc` | Close any open modals |
+| `?` | Display keyboard shortcuts help |
+| `Enter` | Activate focused element |
+| `Arrow Keys` | Navigate search results |
+
+## 📱 Responsive Design
+
+### Tested Breakpoints
+- **320px**: Small mobile devices (iPhone SE)
+- **375px**: Standard mobile devices (iPhone X)  
+- **768px**: Tablet devices (iPad)
+- **1024px+**: Desktop and large screens
+
+### Mobile Features
+- **Progressive Enhancement**: Mobile-first approach
+- **Touch Optimized**: Larger touch targets and spacing
+- **Navigation**: Bottom navigation bar for easy thumb access
+- **Performance**: Optimized images and lazy loading
+
+## 🧪 Testing
+
+### Running Tests
+```bash
+# Run all tests
+yarn test
+
+# Run tests with coverage
+yarn test:coverage
+
+# Run tests with UI
+yarn test:ui
+```
+
+### Test Coverage
+- **Accessibility**: ARIA compliance and keyboard navigation
+- **Component Logic**: User interactions and state management
+- **Responsive Design**: Layout behavior at different breakpoints
+- **Keyboard Shortcuts**: All shortcut combinations and edge cases
+
+## 🚀 Usage Guide
+
+### Admin Workflow
+1. **Login**: Use `admin` access code
+2. **Initialize**: Click "Seed Test Data" for sample data
+3. **Manage**: Access user management, services, and analytics
+4. **Monitor**: View quotation status and project progress
+
+### Client Workflow  
+1. **Login**: Use any `testuser#` access code
+2. **Browse**: Explore available services and packages
+3. **Quote**: Create custom quotations with selected services
+4. **Track**: Monitor project progress and milestones
+5. **Review**: Leave feedback and reviews
 
 ## 🔥 Firebase Database Rules
 
