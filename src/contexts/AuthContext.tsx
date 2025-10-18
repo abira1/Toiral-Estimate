@@ -79,6 +79,27 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const userCredential = await signInAnonymously(auth);
     const firebaseUserId = userCredential.user.uid;
     
+    // First, check if this is a generated access code
+    try {
+      const accessCodeData = await getAccessCodeByCode(code);
+      if (accessCodeData) {
+        // Mark access code as used
+        await markAccessCodeAsUsed(accessCodeData.id);
+        
+        // Create user profile based on access code data
+        const profile = await createUser({
+          name: accessCodeData.userName,
+          email: accessCodeData.email,
+          role: accessCodeData.role
+        });
+        
+        setUserProfile(profile);
+        return;
+      }
+    } catch (error) {
+      console.log('Could not validate access code, checking test user codes');
+    }
+    
     // Check if this is a known test user access code with pre-created data
     if (isTestUserAccessCode(code)) {
       const testUserInfo = getTestUserInfo(code);
