@@ -15,6 +15,23 @@ interface EmailData {
 
 export const sendEmail = async (templateId: string, data: EmailData): Promise<boolean> => {
   try {
+    // Validate EmailJS configuration
+    if (!EMAILJS_SERVICE_ID || !EMAILJS_USER_ID) {
+      console.error('EmailJS configuration missing:', {
+        serviceId: !!EMAILJS_SERVICE_ID,
+        userId: !!EMAILJS_USER_ID,
+        templateId: !!templateId
+      });
+      throw new Error('EmailJS configuration is incomplete');
+    }
+
+    console.log('Sending email with config:', {
+      serviceId: EMAILJS_SERVICE_ID,
+      templateId,
+      userId: EMAILJS_USER_ID?.substring(0, 8) + '...',
+      recipientEmail: data.to_email
+    });
+
     const response = await emailjs.send(
       EMAILJS_SERVICE_ID,
       templateId,
@@ -22,10 +39,13 @@ export const sendEmail = async (templateId: string, data: EmailData): Promise<bo
       EMAILJS_USER_ID
     );
     
-    console.log('Email sent successfully:', response);
+    console.log('Email sent successfully:', response.status, response.text);
     return true;
   } catch (error) {
     console.error('Failed to send email:', error);
+    if (error instanceof Error) {
+      console.error('Error details:', error.message);
+    }
     return false;
   }
 };
