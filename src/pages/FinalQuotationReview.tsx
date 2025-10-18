@@ -108,8 +108,8 @@ export function FinalQuotationReview() {
     setSubmitting(true);
     try {
       const quotation = await createClientQuotation({
-        clientId: user.id,
-        clientCode: user.clientCode || 'CLIENT',
+        clientId: currentUser.uid,
+        clientCode: userProfile?.id || 'CLIENT',
         projectId: quotationData.projectId || 'default',
         selectedAddOns: quotationData.selectedAddOns,
         appliedCoupon: quotationData.appliedCoupon,
