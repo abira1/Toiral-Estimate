@@ -41,7 +41,7 @@ interface QuotationData {
 export function FinalQuotationReview() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { user } = useAuth();
+  const { currentUser, userProfile } = useAuth();
   
   const [quotationData, setQuotationData] = useState<QuotationData | null>(null);
   const [clientData, setClientData] = useState<Client | null>(null);
