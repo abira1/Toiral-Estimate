@@ -33,6 +33,16 @@ export interface ServicePackage {
   price: number;
   description: string;
   features: string[];
+  deliveryTime?: number; // in days
+  addOns?: PackageAddOn[];
+}
+
+export interface PackageAddOn {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  deliveryTime: number; // in days
 }
 
 export interface AddOn {
@@ -40,6 +50,7 @@ export interface AddOn {
   name: string;
   description: string;
   price: number;
+  selected: boolean;
 }
 
 export interface Quotation {
