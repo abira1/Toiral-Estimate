@@ -81,7 +81,7 @@ export function PendingProjectApproval() {
         }
       }
 
-      if (!storedProject && (!user?.id || !projectSetup)) {
+      if (!storedProject && (!currentUser?.uid || !projectSetup)) {
         // If there's no pending project, redirect to projects page
         navigate('/my-projects');
         return;
