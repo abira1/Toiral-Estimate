@@ -67,7 +67,7 @@ export function AddClientModal({ isOpen, onClose, onClientAdded }: AddClientModa
         selectedPackage: formData.selectedPackage || undefined,
         additionalNotes: formData.additionalNotes.trim() || undefined,
         projectDetails: formData.projectDetails.trim() || undefined,
-        createdBy: user.uid
+        createdBy: currentUser.uid
       };
 
       const client = await createClient(clientData);
