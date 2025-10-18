@@ -86,8 +86,8 @@ export function FinalQuotationReview() {
       }
 
       // Load client data
-      if (user?.id) {
-        const client = await getClient(user.id);
+      if (currentUser?.uid) {
+        const client = await getClient(currentUser.uid);
         setClientData(client);
       }
 
