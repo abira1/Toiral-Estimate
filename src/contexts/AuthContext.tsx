@@ -11,7 +11,7 @@ import { auth } from '../config/firebase';
 import { createUser, getUser, updateUser, User, getAllUsers } from '../services/firebaseService';
 import { getTestUserInfo, isTestUserAccessCode } from '../services/testUserMappings';
 import { getAccessCodeByCode, markAccessCodeAsUsed } from '../services/accessCodeService';
-import { getClient, getClientByCode, getAllClients } from '../services/workflowService';
+import { getAllClients } from '../services/workflowService';
 
 interface AuthContextType {
   currentUser: FirebaseUser | null;
