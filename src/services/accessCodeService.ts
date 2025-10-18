@@ -1,4 +1,4 @@
-import { ref, set, get, push } from "firebase/database";
+import { ref, set, get, push, update } from "firebase/database";
 import { database } from "../config/firebase";
 
 export interface AccessCode {
@@ -12,6 +12,11 @@ export interface AccessCode {
   used: boolean;
   usedAt?: string;
   expiresAt: string; // 7 days from creation
+  
+  // Enhanced for client workflow
+  clientId?: string; // Links to client in workflow
+  clientCode?: string; // Client's unique code
+  accessType?: 'invitation' | 'manual' | 'admin'; // How the code was created
 }
 
 // Generate a random access code
