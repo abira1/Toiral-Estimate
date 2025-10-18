@@ -4,13 +4,13 @@ Backend Testing Suite for Toiral Estimate Application
 Firebase Integration Testing for Client Quotation Management System
 
 This test suite verifies:
-1. Firebase Realtime Database connectivity
-2. User creation and authentication workflows
-3. Service package data structure and CRUD operations
-4. Quotation creation, storage, and retrieval
-5. Access code generation and validation system
-6. Email service integration (EmailJS)
-7. Data flow analysis and consistency verification
+1. Frontend application accessibility and loading
+2. Firebase configuration and environment variables
+3. Admin and client authentication workflows
+4. Service package data flow and pricing calculations
+5. Access code generation and email invitation system
+6. Final quotation pricing issue investigation
+7. Cross-component data flow analysis
 """
 
 import requests
@@ -22,6 +22,12 @@ from datetime import datetime, timedelta
 from typing import Dict, List, Any, Optional
 import os
 import sys
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.chrome.options import Options
+from selenium.common.exceptions import TimeoutException, NoSuchElementException
 
 class FirebaseTestSuite:
     def __init__(self):
