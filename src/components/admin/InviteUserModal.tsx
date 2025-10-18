@@ -30,6 +30,8 @@ export function InviteUserModal({ isOpen, onClose, onInviteSent }: InviteUserMod
     setIsLoading(true);
 
     try {
+      console.log('Starting invitation process for:', formData.email);
+      
       // Create access code
       const accessCode = await createAccessCode(
         formData.email,
@@ -38,15 +40,28 @@ export function InviteUserModal({ isOpen, onClose, onInviteSent }: InviteUserMod
         userProfile.id
       );
 
+      console.log('Access code created:', accessCode.code);
+
       // Send invitation email
-      await sendInvitationEmail(
+      const emailSent = await sendInvitationEmail(
         formData.email,
         formData.userName,
         accessCode.code,
         userProfile.name
       );
 
-      toast.success(`Invitation sent to ${formData.email} with access code: ${accessCode.code}`);
+      if (!emailSent) {
+        throw new Error('Email sending failed');
+      }
+
+      toast.success(`✅ Invitation sent successfully!
+      
+📧 Email: ${formData.email}
+🔑 Access Code: ${accessCode.code}
+⏰ Expires: 7 days`, {
+        duration: 8000,
+        style: { maxWidth: '500px' }
+      });
       
       // Reset form
       setFormData({ email: '', userName: '', role: 'user' });
@@ -55,7 +70,23 @@ export function InviteUserModal({ isOpen, onClose, onInviteSent }: InviteUserMod
       onClose();
     } catch (error) {
       console.error('Error sending invitation:', error);
-      toast.error('Failed to send invitation. Please try again.');
+      
+      // Provide specific error messages
+      let errorMessage = 'Failed to send invitation. ';
+      
+      if (error instanceof Error) {
+        if (error.message.includes('EmailJS')) {
+          errorMessage += 'Email service configuration issue. Please check EmailJS settings.';
+        } else if (error.message.includes('Permission denied')) {
+          errorMessage += 'Firebase permission issue. Please check database rules.';
+        } else {
+          errorMessage += `Error: ${error.message}`;
+        }
+      } else {
+        errorMessage += 'Please check your network connection and try again.';
+      }
+      
+      toast.error(errorMessage, { duration: 6000 });
     } finally {
       setIsLoading(false);
     }
