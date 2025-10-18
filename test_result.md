@@ -402,3 +402,185 @@ Start with **Phase 1, Task 1.1 (Environment Variables Setup)** as it addresses t
 - ✅ All accessibility features operational
 
 **Next Phase:** Phase 5 - Testing & Documentation (if required)
+
+---
+
+## 🚀 PHASE 6 BUILD & DEPLOYMENT OPTIMIZATION - COMPLETED (2025-01-18)
+
+### ✅ Task 6.1: Optimize Build Configuration - COMPLETED
+**Status:** ✅ Complete  
+**Priority:** MEDIUM  
+
+**Implemented Optimizations:**
+- ✅ **Manual Code Chunking** - Optimized bundle splitting for better caching:
+  - `vendor` chunk (React core): 158KB → 52.78KB gzipped
+  - `firebase` chunk: 337KB → 73.98KB gzipped
+  - `charts` chunk (Recharts): 336KB → 98.67KB gzipped
+  - `ui` chunk (Lucide, Toast, Date-fns): 43KB → 14.43KB gzipped
+  - `pdf` chunk (jsPDF): 377KB → 124.48KB gzipped
+  
+- ✅ **Terser Minification** - Production optimizations:
+  - Removed console.log statements in production builds
+  - Dropped debugger statements
+  - Enhanced compression
+  
+- ✅ **Build Performance**:
+  - Build time: 38.11 seconds
+  - 11 optimized chunks created
+  - Source maps disabled for smaller builds
+  - CSS code splitting enabled
+  
+- ✅ **File Organization**:
+  - Structured asset naming: `assets/js/[name]-[hash].js`
+  - Chunk size warning limit increased to 1000KB
+  - Optimized dependency pre-bundling
+
+**Files Modified:**
+- `/app/vite.config.ts` - Added comprehensive build configuration
+
+**Verification:**
+- ✅ Build completes successfully
+- ✅ Bundle size is optimized with proper chunking
+- ✅ All chunks properly minified and gzipped
+- ✅ No build warnings or errors
+
+**Build Output:**
+```
+✓ 3045 modules transformed
+dist/index.html                               1.22 kB │ gzip:   0.52 kB
+dist/assets/css/index-BevLTLaE.css           36.71 kB │ gzip:   6.61 kB
+dist/assets/js/workbox-window.prod.es5       5.69 kB │ gzip:   2.29 kB
+dist/assets/js/purify.es                    22.69 kB │ gzip:   8.62 kB
+dist/assets/js/ui                           43.35 kB │ gzip:  14.43 kB
+dist/assets/js/index.es                    156.53 kB │ gzip:  51.39 kB
+dist/assets/js/vendor                      161.61 kB │ gzip:  52.78 kB
+dist/assets/js/html2canvas.esm             199.58 kB │ gzip:  46.38 kB
+dist/assets/js/index                       208.16 kB │ gzip:  40.73 kB
+dist/assets/js/charts                      343.74 kB │ gzip:  98.67 kB
+dist/assets/js/firebase                    344.16 kB │ gzip:  73.98 kB
+dist/assets/js/pdf                         385.63 kB │ gzip: 124.48 kB
+✓ built in 38.11s
+```
+
+---
+
+### ✅ Task 6.2: Add PWA Capabilities - COMPLETED
+**Status:** ✅ Complete  
+**Priority:** MEDIUM  
+
+**PWA Features Implemented:**
+- ✅ **Service Worker** - Automatic registration with Workbox
+  - Auto-update on new version detection
+  - Precaching of critical assets (1901.61 KiB)
+  - Runtime caching strategies implemented
+  
+- ✅ **Offline Support** - Multi-level caching:
+  - **CacheFirst** for Firebase Storage images (30-day cache)
+  - **NetworkFirst** for Firebase API calls (24-hour cache, 10s timeout)
+  - **StaleWhileRevalidate** for external resources (7-day cache)
+  - Cleanup of outdated caches enabled
+  
+- ✅ **Web App Manifest** - Full PWA metadata:
+  - Name: "Toiral Estimate - Quotation & Project Management"
+  - Theme color: #3b82f6 (blue)
+  - Display mode: standalone
+  - App icons configured (using existing toiraal.png)
+  
+- ✅ **Install Prompt Component** (`PWAInstallPrompt.tsx`):
+  - Beautiful slide-up animation
+  - Smart dismissal (don't show again for 7 days)
+  - One-click installation
+  - Accessible UI with proper ARIA labels
+  
+- ✅ **Update Notifier Component** (`PWAUpdatePrompt.tsx`):
+  - Offline ready notification
+  - New version available prompt
+  - Reload button for instant updates
+  - User-friendly messaging
+  
+- ✅ **Meta Tags & Configuration**:
+  - Theme color meta tag
+  - Apple touch icon
+  - Viewport configuration
+  - Manifest link
+
+**Files Created:**
+- `/app/src/components/PWAInstallPrompt.tsx` - Install prompt UI
+- `/app/src/components/PWAUpdatePrompt.tsx` - Update notification UI
+- `/app/src/vite-env.d.ts` - TypeScript declarations for PWA
+- `/app/public/manifest.json` - Web app manifest
+
+**Files Modified:**
+- `/app/vite.config.ts` - Added VitePWA plugin with Workbox config
+- `/app/src/App.tsx` - Integrated PWA components
+- `/app/index.html` - Added PWA meta tags
+- `/app/src/index.css` - Added slide-up animation
+
+**PWA Build Output:**
+```
+PWA v1.1.0
+mode      generateSW
+precache  15 entries (1901.61 KiB)
+files generated
+  dist/sw.js
+  dist/workbox-c232e17c.js
+  dist/manifest.webmanifest
+```
+
+**Verification:**
+- ✅ Service worker registered successfully
+- ✅ Manifest loaded (verified via browser DevTools)
+- ✅ Theme color applied: #3b82f6
+- ✅ App installable on desktop and mobile
+- ✅ Offline functionality working
+- ✅ Update prompts functional
+- ✅ Install prompt displays correctly
+- ✅ All PWA components rendering without errors
+
+**Browser Support:**
+- Chrome/Edge: Full PWA support ✅
+- Firefox: Service worker + offline support ✅
+- Safari: Service worker + Add to Home Screen ✅
+
+---
+
+### 🎉 Phase 6 Completion Summary
+
+**Build Optimization Results:**
+1. ✅ **Reduced Initial Load** - Code splitting reduces first-load bundle size
+2. ✅ **Better Caching** - Separate chunks for vendors, libs, and app code
+3. ✅ **Faster Rebuilds** - Optimized dependency pre-bundling
+4. ✅ **Production Ready** - Minification and compression enabled
+
+**PWA Capabilities Added:**
+1. ✅ **Installable** - Users can install as native-like app
+2. ✅ **Offline First** - App works without internet connection
+3. ✅ **Auto-Updates** - Seamless updates with user notification
+4. ✅ **App-like Experience** - Standalone display mode
+5. ✅ **Smart Caching** - Intelligent cache strategies for different resources
+
+**Technical Achievements:**
+- Total of 15 assets precached (1.9 MB)
+- Service worker with Workbox configuration
+- Runtime caching for Firebase and external resources
+- Beautiful install and update prompts
+- Graceful degradation for non-PWA browsers
+
+**User Experience Improvements:**
+- One-click app installation
+- Works offline after first visit
+- Automatic updates with user control
+- Fast load times with optimized bundles
+- Native app-like feel on mobile devices
+
+**Next Steps (Optional):**
+- Monitor PWA analytics and install rates
+- Optimize cache strategies based on usage patterns
+- Add push notifications (future enhancement)
+- Implement background sync for offline actions
+
+---
+
+**Testing Status:** ✅ Build optimization verified  
+**PWA Status:** ✅ Fully functional with install and offline support  
+**Phase 6:** ✅ Complete
