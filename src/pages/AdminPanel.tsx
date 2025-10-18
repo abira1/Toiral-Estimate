@@ -78,7 +78,7 @@ export function AdminPanel() {
           <Routes>
             <Route path="/" element={<AdminDashboard />} />
             <Route path="/users" element={<UserManagement />} />
-            <Route path="/services" element={<ServiceManagement />} />
+            <Route path="/services" element={<ServiceManagementNew />} />
             <Route path="/quotations" element={<QuotationManagement />} />
             <Route path="/package-setup/:userId" element={<PackageSetup />} />
           </Routes>
