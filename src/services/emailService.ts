@@ -135,21 +135,12 @@ export const sendInvitationEmail = async (
     accessCode: accessCode.substring(0, 4) + '...'
   });
 
-  // Try different parameter naming conventions that EmailJS templates commonly use
+  // Use minimal, most common EmailJS template parameters
+  // Based on standard EmailJS template variable names
   const templateParams = {
-    // Standard EmailJS parameter names
-    user_name: userName,
-    user_email: userEmail,
-    access_code: accessCode,
-    inviter_name: inviterName,
-    app_url: typeof window !== 'undefined' ? window.location.origin : 'http://localhost:3001',
-    
-    // Alternative parameter names (common in EmailJS templates)
-    to_name: userName,
-    to_email: userEmail,
-    from_name: 'Toiral Web Development',
-    
-    // Message content
+    // Most common EmailJS variable names (try these first)
+    name: userName,
+    email: userEmail,
     message: `Dear ${userName},
 
 You have been invited to join Toiral Estimate by ${inviterName}.
@@ -168,7 +159,11 @@ Welcome to Toiral!
 Best regards,
 Toiral Team`,
     
-    // Additional common template variables
+    // Additional variables that templates commonly expect
+    user_name: userName,
+    user_email: userEmail,
+    access_code: accessCode,
+    inviter_name: inviterName,
     subject: 'Welcome to Toiral - Your Access Code'
   };
 
@@ -176,13 +171,13 @@ Toiral Team`,
 
   try {
     // Validate EmailJS configuration
-    if (!EMAILJS_SERVICE_ID || !EMAILJS_USER_ID) {
+    if (!EMAILJS_SERVICE_ID || !EMAILJS_USER_ID || !templateId) {
       console.error('EmailJS configuration missing:', {
         serviceId: !!EMAILJS_SERVICE_ID,
         userId: !!EMAILJS_USER_ID,
         templateId: !!templateId
       });
-      throw new Error('EmailJS configuration is incomplete');
+      throw new Error('EmailJS configuration is incomplete - missing service ID, user ID, or template ID');
     }
 
     console.log('Sending email with config:', {
@@ -199,14 +194,37 @@ Toiral Team`,
       EMAILJS_USER_ID
     );
     
-    console.log('Email sent successfully:', response.status, response.text);
+    console.log('✅ Email sent successfully!', {
+      status: response.status,
+      text: response.text,
+      recipient: userEmail
+    });
     return true;
-  } catch (error) {
-    console.error('Failed to send email:', error);
-    if (error instanceof Error) {
-      console.error('Error details:', error.message);
+    
+  } catch (error: any) {
+    console.error('❌ EmailJS Error Details:', {
+      error: error,
+      status: error?.status || 'No status',
+      text: error?.text || error?.message || 'No message',
+      templateId,
+      serviceId: EMAILJS_SERVICE_ID
+    });
+    
+    // Provide specific error messages based on error type
+    if (error?.status === 422) {
+      console.error('🔍 HTTP 422 Error: Template parameter mismatch. The template may expect different variable names or missing required fields.');
+      throw new Error(`EmailJS Template Error (422): Template "${templateId}" parameter mismatch. Please check template variables.`);
+    } else if (error?.status === 400) {
+      throw new Error('EmailJS Bad Request (400): Invalid request parameters or configuration.');
+    } else if (error?.status === 401) {
+      throw new Error('EmailJS Unauthorized (401): Invalid public key or service configuration.');
+    } else if (error?.status === 404) {
+      throw new Error(`EmailJS Not Found (404): Template "${templateId}" or service "${EMAILJS_SERVICE_ID}" not found.`);
+    } else if (error?.status === 429) {
+      throw new Error('EmailJS Rate Limit (429): Too many requests. Please wait and try again.');
+    } else {
+      throw new Error(`EmailJS Error: ${error?.message || 'Unknown error occurred'}`);
     }
-    return false;
   }
 };
 
