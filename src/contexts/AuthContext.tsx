@@ -110,6 +110,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
     
     // Check if this is a known test user access code with pre-created data
+    const knownTestCodes = ['admin', 'testuser1', 'testuser2', 'testuser3'];
+    const isKnownTestCode = knownTestCodes.includes(code.toLowerCase());
+    
+    // Check if this is a known test user access code with pre-created data
     if (isTestUserAccessCode(code)) {
       const testUserInfo = getTestUserInfo(code);
       
