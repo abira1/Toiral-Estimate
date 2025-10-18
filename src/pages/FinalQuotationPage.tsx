@@ -472,11 +472,19 @@ export function FinalQuotationPage() {
               {/* Final Actions */}
               <div className="mt-8 border-t border-gray-200 pt-6">
                 <div className="flex flex-col sm:flex-row gap-4 justify-end">
-                  <button onClick={downloadPDF} className="px-6 py-3 border-2 border-secondary-600 text-secondary-600 rounded-xl hover:bg-secondary-50 transition-colors flex items-center justify-center gap-2">
+                  <button 
+                    onClick={downloadPDF} 
+                    disabled={!selectedPackage}
+                    className="px-6 py-3 border-2 border-secondary-600 text-secondary-600 rounded-xl hover:bg-secondary-50 transition-colors flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
                     <DownloadIcon size={18} />
                     Download PDF
                   </button>
-                  <button onClick={saveQuotation} className="px-6 py-3 bg-primary-600 text-white rounded-xl hover:bg-primary-700 transition-colors flex items-center justify-center gap-2">
+                  <button 
+                    onClick={saveQuotation} 
+                    disabled={!selectedPackage}
+                    className="px-6 py-3 bg-primary-600 text-white rounded-xl hover:bg-primary-700 transition-colors flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
                     <ArrowRightIcon size={18} />
                     Complete Quotation
                   </button>
