@@ -68,6 +68,7 @@ function AppWithKeyboardShortcuts() {
           },
         }}
       />
+      <Routes>
         <Route path="/" element={<LoginPage />} />
         <Route path="/dashboard" element={<ProtectedRoute>
               <Dashboard />
