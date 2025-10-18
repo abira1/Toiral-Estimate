@@ -27,9 +27,15 @@ type PendingProject = {
 };
 export function PendingProjectApproval() {
   const navigate = useNavigate();
+  const { user } = useAuth();
   const [pendingProject, setPendingProject] = useState<PendingProject | null>(null);
-  const [addOns, setAddOns] = useState<AddOn[]>([]);
+  const [projectSetup, setProjectSetup] = useState<ProjectSetup | null>(null);
+  const [selectedAddOns, setSelectedAddOns] = useState<ProjectAddOn[]>([]);
+  const [appliedCoupon, setAppliedCoupon] = useState<Coupon | null>(null);
+  const [finalPrice, setFinalPrice] = useState(0);
+  const [finalDeliveryTime, setFinalDeliveryTime] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
+  const [showAddOnsModal, setShowAddOnsModal] = useState(false);
   useEffect(() => {
     // Load the pending project from localStorage
     const storedProject = localStorage.getItem('pendingProject');
