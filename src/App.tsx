@@ -65,5 +65,6 @@ export function App() {
         </Routes>
       </BrowserRouter>
     </AuthProvider>
+  </DataInitializer>
   );
 }
