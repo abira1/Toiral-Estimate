@@ -1,30 +1,64 @@
-# Toiral Estimate - Test Users Setup Guide
+# Toiral Estimate - Quotation Builder Application
 
-## 🎉 Quick Start - Admin Login Working!
+## 🎉 Overview
 
-Your admin login is now working! You can log in with:
-- **Access Code:** `admin`
-- **Purpose:** Access admin dashboard and seed test data
+Toiral Estimate is a comprehensive web application for creating and managing website development quotations. Built with React, TypeScript, and Firebase, it provides both client and admin interfaces with full accessibility support.
 
-## 📦 What's Been Created
+## ✨ Features
 
-### 1. Test User Access Codes
-Pre-configured access codes for easy testing:
-- `admin` - Admin User
-- `testuser1` - John Smith (will have active projects after seeding)
-- `testuser2` - Sarah Johnson (will have draft quotations after seeding)
-- `testuser3` - Michael Chen (will have completed projects after seeding)
+### Core Functionality
+- **Client Portal**: Create and manage quotations, track project progress
+- **Admin Dashboard**: Manage users, services, and view analytics
+- **Real-time Data**: Firebase integration for live updates
+- **Test Environment**: Pre-configured test users and sample data
 
-### 2. Seed Data Button
-A convenient button in the Admin Dashboard to populate the database with:
-- 3 test client users with realistic data
-- 1 admin user profile
-- 4 sample quotations (various statuses: draft, sent, approved)
-- 3 sample projects (active, pending, completed)
-- 6 service packages (Web Design, Complete Website, Social Media)
+### Accessibility & UX (Phase 4 Complete)
+- **🎯 WCAG 2.1 AA Compliant**: Full screen reader support and keyboard navigation
+- **📱 Mobile-First**: Responsive design tested at all breakpoints (320px, 375px, 768px+)
+- **⌨️ Keyboard Shortcuts**: 
+  - `Ctrl/Cmd + K` - Open search modal
+  - `Esc` - Close any modals
+  - `?` - Show keyboard shortcuts help
+- **🔍 Smart Search**: Quick navigation across all app sections
+- **♿ Semantic HTML**: Proper heading hierarchy and landmark roles
 
-### 3. Enhanced Login Page
-The login page now displays all available test access codes with descriptions.
+### Technical Features  
+- **TypeScript**: Full type safety and developer experience
+- **Modern React**: Hooks, Context API, and component composition
+- **Tailwind CSS**: Utility-first styling with custom design system
+- **Testing Suite**: Comprehensive accessibility and functionality tests
+- **Hot Reload**: Development server with instant updates
+
+## 🚀 Quick Start
+
+### Prerequisites
+- Node.js 16+ and Yarn package manager
+- Firebase project configured for Realtime Database
+
+### Installation & Setup
+```bash
+# Clone and install dependencies
+cd /app
+yarn install
+
+# Start development server
+yarn dev
+```
+
+The application will be available at `http://localhost:3000`
+
+## 👤 User Access
+
+### Test Access Codes
+- **`admin`** - Admin panel with full system access
+- **`testuser1`** - John Smith (active projects)  
+- **`testuser2`** - Sarah Johnson (new user)
+- **`testuser3`** - Michael Chen (completed projects)
+
+### Admin Setup (One-Time)
+1. Login with `admin` access code
+2. Click "Seed Test Data" button on dashboard
+3. Sample data will populate automatically
 
 ## 🚀 How to Use
 
