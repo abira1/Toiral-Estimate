@@ -369,9 +369,9 @@ export function Dashboard() {
                   </span>
                 </div>
               </div>
-            </div>
+            </section>
           </div>
         </div>
-      </div>
+      </main>
     </div>;
 }
