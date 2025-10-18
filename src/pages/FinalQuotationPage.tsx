@@ -196,10 +196,11 @@ export function FinalQuotationPage() {
       // Save to Firebase
       await createQuotation(quotation);
       
-      // Clear localStorage after successful save
+      // Clear localStorage after successful save (both old and new formats)
       localStorage.removeItem('selectedPackageId');
       localStorage.removeItem('selectedAddOns');
       localStorage.removeItem('quotationTotal');
+      localStorage.removeItem('quotationSelection');
       
       toast.success('Quotation saved successfully!');
       
