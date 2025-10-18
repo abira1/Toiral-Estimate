@@ -98,24 +98,32 @@ export function Sidebar() {
               </NavLink>
             </li>
           </ul>
-        </div>
+        </nav>
         <div className="p-4 border-t border-gray-200">
-          <ul className="space-y-2">
+          <ul className="space-y-2" role="list">
             <li>
-              <a href="#" className="flex items-center p-3 rounded-xl text-gray-600 hover:bg-gray-100 transition-colors">
-                <SettingsIcon size={20} className="flex-shrink-0" />
+              <a 
+                href="#" 
+                className="flex items-center p-3 rounded-xl text-gray-600 hover:bg-gray-100 transition-colors focus:ring-2 focus:ring-primary-500 focus:outline-none"
+                aria-label="Open Settings"
+              >
+                <SettingsIcon size={20} className="flex-shrink-0" aria-hidden="true" />
                 <span className="ml-3 hidden lg:block">Settings</span>
               </a>
             </li>
             <li>
-              <button onClick={handleLogout} className="w-full flex items-center p-3 rounded-xl text-gray-600 hover:bg-gray-100 transition-colors">
-                <LogOutIcon size={20} className="flex-shrink-0" />
+              <button 
+                onClick={handleLogout} 
+                className="w-full flex items-center p-3 rounded-xl text-gray-600 hover:bg-gray-100 transition-colors focus:ring-2 focus:ring-primary-500 focus:outline-none"
+                aria-label="Log out of your account"
+              >
+                <LogOutIcon size={20} className="flex-shrink-0" aria-hidden="true" />
                 <span className="ml-3 hidden lg:block">Logout</span>
               </button>
             </li>
           </ul>
         </div>
-      </div>
+      </aside>
       {/* Mobile Bottom Navigation */}
       <div className="sm:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-50">
         <div className="flex justify-around items-center py-2">
