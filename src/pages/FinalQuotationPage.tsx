@@ -41,17 +41,49 @@ export function FinalQuotationPage() {
     // Load service packages
     const storedServices = JSON.parse(localStorage.getItem('servicePackages') || '[]');
     setServicePackages(storedServices);
-    // Load selected package
+    
+    // First try to load from new quotationSelection format
+    const quotationSelection = localStorage.getItem('quotationSelection');
+    if (quotationSelection) {
+      try {
+        const selectionData = JSON.parse(quotationSelection);
+        if (selectionData.package) {
+          setSelectedPackage(selectionData.package);
+        }
+        if (selectionData.addOns && Array.isArray(selectionData.addOns)) {
+          // Convert add-ons to the expected format
+          const convertedAddOns = selectionData.addOns.map((addon: any) => ({
+            ...addon,
+            selected: true // These are already selected add-ons
+          }));
+          setSelectedAddOns(convertedAddOns);
+        }
+        console.log('✅ Loaded quotation data from new format:', selectionData);
+        return; // Exit early if we found the new format
+      } catch (error) {
+        console.error('Error parsing quotation selection:', error);
+      }
+    }
+    
+    // Fallback to old format for backward compatibility
     const packageId = localStorage.getItem('selectedPackageId');
     if (packageId) {
       const foundPackage = storedServices.find((pkg: ServicePackage) => pkg.id === packageId);
       if (foundPackage) {
         setSelectedPackage(foundPackage);
+        console.log('✅ Loaded package from legacy format:', foundPackage);
       }
     }
-    // Load selected add-ons
+    
+    // Load selected add-ons from old format
     const addOns = JSON.parse(localStorage.getItem('selectedAddOns') || '[]');
     setSelectedAddOns(addOns);
+    
+    // If no data found in either format, show warning
+    if (!quotationSelection && !packageId) {
+      console.warn('⚠️ No package selection found. User may need to select a service package first.');
+      toast.error('No service package selected. Please select a package from Services page first.');
+    }
   }, []);
   const calculateSubtotal = () => {
     const packagePrice = selectedPackage?.price || 0;
