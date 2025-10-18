@@ -53,7 +53,7 @@ export function PendingProjectApproval() {
 
       // Also try to load from workflow system if user is available
       if (user?.id) {
-        const setup = await getProjectSetupByClient(user.id);
+        const setup = await getProjectSetupByClient(currentUser.uid);
         if (setup && setup.status === 'sent_to_client') {
           setProjectSetup(setup);
           
