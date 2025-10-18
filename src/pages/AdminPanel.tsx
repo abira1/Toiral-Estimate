@@ -43,9 +43,15 @@ export function AdminPanel() {
               </button>
             </li>
             <li>
+              <button onClick={() => navigate('/admin/clients')} className={`w-full flex items-center p-3 rounded-xl transition-colors ${isActive('/clients') ? 'bg-primary-700 text-white' : 'text-primary-100 hover:bg-primary-700/50'}`}>
+                <UsersIcon size={20} className="flex-shrink-0" />
+                <span className="ml-3">Client Management</span>
+              </button>
+            </li>
+            <li>
               <button onClick={() => navigate('/admin/users')} className={`w-full flex items-center p-3 rounded-xl transition-colors ${isActive('/users') ? 'bg-primary-700 text-white' : 'text-primary-100 hover:bg-primary-700/50'}`}>
                 <UsersIcon size={20} className="flex-shrink-0" />
-                <span className="ml-3">User Management</span>
+                <span className="ml-3">Legacy Users</span>
               </button>
             </li>
             <li>
