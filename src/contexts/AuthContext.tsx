@@ -10,6 +10,7 @@ import {
 import { auth } from '../config/firebase';
 import { createUser, getUser, updateUser, User, getAllUsers } from '../services/firebaseService';
 import { getTestUserInfo, isTestUserAccessCode } from '../services/testUserMappings';
+import { getAccessCodeByCode, markAccessCodeAsUsed } from '../services/accessCodeService';
 
 interface AuthContextType {
   currentUser: FirebaseUser | null;
