@@ -45,7 +45,7 @@ export function AddClientModal({ isOpen, onClose, onClientAdded }: AddClientModa
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!user) {
+    if (!currentUser || !userProfile) {
       toast.error('You must be logged in to add a client');
       return;
     }
