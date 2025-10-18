@@ -41,7 +41,7 @@ export function ClientDashboard() {
 
   useEffect(() => {
     loadDashboardData();
-  }, [user]);
+  }, [currentUser]);
 
   const loadDashboardData = async () => {
     try {
