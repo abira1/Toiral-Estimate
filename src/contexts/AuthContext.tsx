@@ -169,6 +169,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       };
       setUserProfile(tempProfile);
     }
+    
+    // If we reached here and it's not a known test code, it's invalid
+    if (!isKnownTestCode) {
+      throw new Error('INVALID_ACCESS_CODE: Invalid access code. Please check your code and try again.');
+    }
   };
 
   const value: AuthContextType = {
