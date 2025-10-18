@@ -8,7 +8,8 @@ import {
   signInAnonymously
 } from 'firebase/auth';
 import { auth } from '../config/firebase';
-import { createUser, getUser, updateUser, User } from '../services/firebaseService';
+import { createUser, getUser, updateUser, User, getAllUsers } from '../services/firebaseService';
+import { getTestUserInfo, isTestUserAccessCode } from '../services/testUserMappings';
 
 interface AuthContextType {
   currentUser: FirebaseUser | null;
