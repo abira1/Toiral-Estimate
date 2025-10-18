@@ -308,7 +308,7 @@ export function Dashboard() {
             </div>
             {/* Leave a Review Form */}
             <section className="bg-white rounded-2xl shadow-retro-lg border border-gray-200 p-6" aria-labelledby="review-heading">
-              <h2 className="text-xl font-semibold mb-4 text-gray-800">
+              <h2 id="review-heading" className="text-xl font-semibold mb-4 text-gray-800">
                 Leave a Review
               </h2>
               <form onSubmit={handleReviewSubmit}>
