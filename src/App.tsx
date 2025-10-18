@@ -93,6 +93,15 @@ function AppWithKeyboardShortcuts() {
         <Route path="/pending-project-approval" element={<ProtectedRoute>
               <PendingProjectApproval />
             </ProtectedRoute>} />
+        <Route path="/pending-project-approvals" element={<ProtectedRoute>
+              <PendingProjectApprovals />
+            </ProtectedRoute>} />
+        <Route path="/project-approval-details/:quotationId" element={<ProtectedRoute>
+              <ProjectApprovalDetails />
+            </ProtectedRoute>} />
+        <Route path="/final-quotation-review" element={<ProtectedRoute>
+              <FinalQuotationReview />
+            </ProtectedRoute>} />
         <Route path="/invoice" element={<ProtectedRoute>
               <InvoicePage />
             </ProtectedRoute>} />
