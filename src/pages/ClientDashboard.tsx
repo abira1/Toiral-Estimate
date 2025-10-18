@@ -45,7 +45,7 @@ export function ClientDashboard() {
 
   const loadDashboardData = async () => {
     try {
-      if (!user?.id) {
+      if (!currentUser?.uid) {
         setLoading(false);
         return;
       }
