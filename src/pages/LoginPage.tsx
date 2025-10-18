@@ -61,7 +61,7 @@ export function LoginPage() {
               <div className="bg-gray-100 p-2 rounded-lg mr-2">
                 <LockIcon className="text-gray-500" size={20} />
               </div>
-              <input type="text" placeholder="Enter your access code (use 'admin' for admin panel)" className="flex-1 outline-none text-gray-800 min-w-0 w-full" value={accessCode} onChange={e => setAccessCode(e.target.value)} />
+              <input type="text" placeholder="Enter access code (e.g., 'admin' or 'testuser1')" className="flex-1 outline-none text-gray-800 min-w-0 w-full" value={accessCode} onChange={e => setAccessCode(e.target.value)} />
               <button type="submit" disabled={isLoading} className="bg-primary-600 text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-primary-700 transition-colors mt-2 sm:mt-0 w-full sm:w-auto">
                 {isLoading ? 'Logging in...' : 'Login'}
                 {!isLoading && <ArrowRightIcon size={16} />}
