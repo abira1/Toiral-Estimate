@@ -100,7 +100,7 @@ export function FinalQuotationReview() {
   };
 
   const handleConfirmQuotation = async () => {
-    if (!quotationData || !user?.id) {
+    if (!quotationData || !currentUser?.uid) {
       toast.error('Missing quotation or user data');
       return;
     }
