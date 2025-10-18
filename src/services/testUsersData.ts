@@ -229,34 +229,6 @@ const sampleServices: Omit<ServicePackage, 'id'>[] = [
   }
 ];
 
-// Add-ons data
-const sampleAddOns = [
-  {
-    id: 'addon-1',
-    name: 'E-commerce Integration',
-    description: 'Full shopping cart and payment gateway integration',
-    price: 200
-  },
-  {
-    id: 'addon-2',
-    name: 'Custom CMS',
-    description: 'Content management system for easy updates',
-    price: 150
-  },
-  {
-    id: 'addon-3',
-    name: 'SEO Package',
-    description: 'Comprehensive SEO optimization and keyword research',
-    price: 100
-  },
-  {
-    id: 'addon-4',
-    name: 'Email Marketing Setup',
-    description: 'Newsletter integration with email automation',
-    price: 75
-  }
-];
-
 /**
  * Initialize test users with complete sample data
  * This creates 3 test clients and 1 admin with quotations and projects
