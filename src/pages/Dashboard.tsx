@@ -304,10 +304,10 @@ export function Dashboard() {
                     </div>
                   </div>
                 </div>
-              </div>
+              </section>
             </div>
             {/* Leave a Review Form */}
-            <div className="bg-white rounded-2xl shadow-retro-lg border border-gray-200 p-6">
+            <section className="bg-white rounded-2xl shadow-retro-lg border border-gray-200 p-6" aria-labelledby="review-heading">
               <h2 className="text-xl font-semibold mb-4 text-gray-800">
                 Leave a Review
               </h2>
