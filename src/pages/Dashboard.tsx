@@ -85,14 +85,14 @@ export function Dashboard() {
   };
   return <div className="bg-lavender-light min-h-screen">
       <Sidebar />
-      <div className="sm:pl-20 lg:pl-64 pb-20 sm:pb-0">
+      <main className="sm:pl-20 lg:pl-64 pb-20 sm:pb-0" role="main">
         <div className="p-4 sm:p-6">
-          <div className="mb-6">
+          <header className="mb-6">
             <h1 className="text-2xl sm:text-3xl font-bold text-gray-800">
               Dashboard
             </h1>
             <p className="text-gray-600">Welcome back, {userProfile.name}</p>
-          </div>
+          </header>
           {/* User Profile Card */}
           <div className="bg-white rounded-2xl shadow-retro border border-gray-200 p-4 sm:p-6 mb-6">
             <div className="flex items-center">
