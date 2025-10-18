@@ -9,18 +9,35 @@ import {
   User
 } from './firebaseService';
 
-// Sample services data
+// Sample services data with add-ons and delivery times
 const sampleServices: Omit<ServicePackage, 'id'>[] = [
   {
     category: 'Web & App Design',
     name: 'Basic',
     price: 60,
     description: 'Single-page website or app design, responsive layout.',
+    deliveryTime: 7,
     features: [
       'Single-page website or app design',
       'Responsive layout for all devices',
       '1 revision',
       'Delivery of design in PNG/JPG'
+    ],
+    addOns: [
+      {
+        id: 'addon-basic-1',
+        name: 'Extra Revision',
+        description: 'Additional design revision beyond the included one',
+        price: 30,
+        deliveryTime: 2
+      },
+      {
+        id: 'addon-basic-2',
+        name: 'Source Files',
+        description: 'Figma/XD source files included',
+        price: 50,
+        deliveryTime: 0
+      }
     ]
   },
   {
@@ -28,12 +45,36 @@ const sampleServices: Omit<ServicePackage, 'id'>[] = [
     name: 'Standard',
     price: 150,
     description: 'Up to 5 pages/screens with interactive prototype and brand-focused UI.',
+    deliveryTime: 14,
     features: [
       'Up to 5 pages/screens',
       'Brand-focused UI/UX design',
       'Interactive clickable prototype',
       '3 revisions',
       'Delivery in PNG, JPG, and Figma/Adobe XD'
+    ],
+    addOns: [
+      {
+        id: 'addon-std-1',
+        name: 'Extra Pages',
+        description: '3 additional pages/screens',
+        price: 75,
+        deliveryTime: 3
+      },
+      {
+        id: 'addon-std-2',
+        name: 'Animation Design',
+        description: 'Micro-interactions and transition animations',
+        price: 100,
+        deliveryTime: 5
+      },
+      {
+        id: 'addon-std-3',
+        name: 'Mobile App Version',
+        description: 'Adapt design for mobile app',
+        price: 120,
+        deliveryTime: 7
+      }
     ]
   },
   {
@@ -41,12 +82,36 @@ const sampleServices: Omit<ServicePackage, 'id'>[] = [
     name: 'Premium',
     price: 500,
     description: 'For large organizations with complex design needs.',
+    deliveryTime: 30,
     features: [
       'Complete website/app design (unlimited pages/screens)',
       'Detailed design system (colors, typography, buttons, icons)',
       'Unlimited revisions',
       'Interactive prototype with animations',
       'Delivery in all source files (Figma/Adobe XD)'
+    ],
+    addOns: [
+      {
+        id: 'addon-prem-1',
+        name: 'Brand Guidelines',
+        description: 'Comprehensive brand identity guideline document',
+        price: 200,
+        deliveryTime: 7
+      },
+      {
+        id: 'addon-prem-2',
+        name: 'Developer Handoff',
+        description: 'Detailed specifications and developer documentation',
+        price: 150,
+        deliveryTime: 5
+      },
+      {
+        id: 'addon-prem-3',
+        name: 'User Testing',
+        description: 'Conduct user testing with 10 participants',
+        price: 300,
+        deliveryTime: 14
+      }
     ]
   },
   {
@@ -54,6 +119,7 @@ const sampleServices: Omit<ServicePackage, 'id'>[] = [
     name: 'Complete Website',
     price: 1200,
     description: 'All-in-one solution for businesses that want to establish a strong online presence.',
+    deliveryTime: 45,
     features: [
       'Custom design',
       'Full-stack development',
@@ -63,6 +129,36 @@ const sampleServices: Omit<ServicePackage, 'id'>[] = [
       'Mobile responsive',
       '30 days of support',
       'Analytics integration'
+    ],
+    addOns: [
+      {
+        id: 'addon-complete-1',
+        name: 'E-commerce Integration',
+        description: 'Full shopping cart and payment gateway',
+        price: 400,
+        deliveryTime: 14
+      },
+      {
+        id: 'addon-complete-2',
+        name: 'Blog System',
+        description: 'Custom blog with CMS integration',
+        price: 200,
+        deliveryTime: 7
+      },
+      {
+        id: 'addon-complete-3',
+        name: 'Multi-language Support',
+        description: 'Support for 3 additional languages',
+        price: 300,
+        deliveryTime: 10
+      },
+      {
+        id: 'addon-complete-4',
+        name: 'Advanced SEO',
+        description: 'Technical SEO audit and optimization',
+        price: 250,
+        deliveryTime: 5
+      }
     ]
   },
   {
@@ -70,11 +166,28 @@ const sampleServices: Omit<ServicePackage, 'id'>[] = [
     name: 'Starter',
     price: 300,
     description: 'Perfect for businesses just beginning their social media journey.',
+    deliveryTime: 7,
     features: [
       '8 posts per month',
       'Basic image creation',
       'Caption writing',
       'Monthly performance report'
+    ],
+    addOns: [
+      {
+        id: 'addon-social-1',
+        name: 'Extra Posts',
+        description: '4 additional posts per month',
+        price: 100,
+        deliveryTime: 0
+      },
+      {
+        id: 'addon-social-2',
+        name: 'Story Creation',
+        description: 'Daily Instagram/Facebook stories',
+        price: 150,
+        deliveryTime: 0
+      }
     ]
   },
   {
@@ -82,12 +195,36 @@ const sampleServices: Omit<ServicePackage, 'id'>[] = [
     name: 'Growth',
     price: 600,
     description: 'For businesses ready to expand their social media presence.',
+    deliveryTime: 7,
     features: [
       '15 posts per month',
       'Advanced image and video creation',
       'Engagement strategy',
       'Hashtag research',
       'Bi-weekly performance reports'
+    ],
+    addOns: [
+      {
+        id: 'addon-growth-1',
+        name: 'Video Content',
+        description: '4 professional video posts per month',
+        price: 250,
+        deliveryTime: 0
+      },
+      {
+        id: 'addon-growth-2',
+        name: 'Influencer Outreach',
+        description: 'Connect with 10 relevant influencers',
+        price: 200,
+        deliveryTime: 0
+      },
+      {
+        id: 'addon-growth-3',
+        name: 'Ad Campaign Management',
+        description: 'Social media advertising setup and management',
+        price: 350,
+        deliveryTime: 3
+      }
     ]
   }
 ];
