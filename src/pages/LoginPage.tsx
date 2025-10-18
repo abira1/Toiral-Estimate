@@ -68,8 +68,11 @@ export function LoginPage() {
               </button>
             </div>
             <p className="text-sm text-gray-500 mt-2">
-              Hint: Use "admin" to access the admin panel or any other text for
-              regular user access.
+              <strong>Test Access Codes:</strong><br />
+              • <strong>admin</strong> - Admin panel access<br />
+              • <strong>testuser1</strong> - John Smith (active projects)<br />
+              • <strong>testuser2</strong> - Sarah Johnson (new user)<br />
+              • <strong>testuser3</strong> - Michael Chen (completed projects)
             </p>
           </form>
         </div>
