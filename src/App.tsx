@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import { AuthProvider } from './contexts/AuthContext';
+import { DataInitializer } from './components/DataInitializer';
 import { LoginPage } from './pages/LoginPage';
 import { Dashboard } from './pages/Dashboard';
 import { MyQuotations } from './pages/MyQuotations';
@@ -17,8 +18,9 @@ import { AnalyticsPage } from './pages/AnalyticsPage';
 
 export function App() {
   return (
-    <AuthProvider>
-      <BrowserRouter>
+    <DataInitializer>
+      <AuthProvider>
+        <BrowserRouter>
         <Toaster 
           position="top-right"
           toastOptions={{
