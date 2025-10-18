@@ -94,30 +94,38 @@ export function PendingProjectApproval() {
       setIsLoading(false);
     }
   };
-  const toggleAddOn = (id: string) => {
-    setAddOns(addOns.map(addon => addon.id === id ? {
-      ...addon,
-      selected: !addon.selected
-    } : addon));
+  const handleOpenAddOnsModal = () => {
+    setShowAddOnsModal(true);
   };
+
+  const handleAddOnsConfirm = (addOns: ProjectAddOn[], coupon: Coupon | null, price: number, deliveryTime: number) => {
+    setSelectedAddOns(addOns);
+    setAppliedCoupon(coupon);
+    setFinalPrice(price);
+    setFinalDeliveryTime(deliveryTime);
+    setShowAddOnsModal(false);
+    toast.success('Add-ons selection updated!');
+  };
+
   const calculateTotal = () => {
-    if (!pendingProject) return 0;
-    const packagePrice = pendingProject.customPrice || pendingProject.servicePackage.price;
-    const addOnsPrice = addOns.filter(addon => addon.selected).reduce((sum, addon) => sum + addon.price, 0);
-    return packagePrice + addOnsPrice;
+    return finalPrice;
   };
+
   const handleContinue = () => {
     if (!pendingProject) return;
-    // Store selected package and add-ons in localStorage
-    const selectedAddOns = addOns.filter(addon => addon.selected);
-    // Store the custom package as the selected package
-    localStorage.setItem('selectedPackageId', pendingProject.servicePackage.id);
-    localStorage.setItem('selectedAddOns', JSON.stringify(selectedAddOns));
-    localStorage.setItem('quotationTotal', calculateTotal().toString());
-    // Store custom package details if needed
-    localStorage.setItem('customPackagePrice', pendingProject.customPrice ? pendingProject.customPrice.toString() : pendingProject.servicePackage.price.toString());
-    // Navigate to final quotation page
-    navigate('/final-quotation');
+    
+    // Navigate to final quotation review with all the data
+    navigate('/final-quotation-review', {
+      state: {
+        basePrice: pendingProject.customPrice || pendingProject.servicePackage.price,
+        selectedAddOns: selectedAddOns,
+        appliedCoupon: appliedCoupon,
+        finalPrice: finalPrice,
+        finalDeliveryTime: finalDeliveryTime,
+        projectName: pendingProject.name,
+        projectId: pendingProject.id
+      }
+    });
   };
   const handleCancel = () => {
     // Clear the pending project from localStorage
