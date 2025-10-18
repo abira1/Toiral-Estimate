@@ -64,6 +64,7 @@ export function AdminDashboard() {
       {/* Admin Actions */}
       <div className="mb-6 flex flex-wrap gap-4">
         <SeedDataButton />
+        <Phase5SeedButton />
         <button
           onClick={() => setIsInviteModalOpen(true)}
           className="px-6 py-3 bg-secondary-600 text-white rounded-xl hover:bg-secondary-700 transition-colors flex items-center gap-2 shadow-retro"
