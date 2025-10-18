@@ -139,26 +139,42 @@ export function FinalQuotationPage() {
     // Save the PDF
     doc.save(quotationName.replace(/\s+/g, '_') + '.pdf');
   };
-  const saveQuotation = () => {
+  const saveQuotation = async () => {
     if (!selectedPackage) return;
-    const quotation = {
-      id: Date.now().toString(),
-      name: quotationName,
-      date: new Date().toISOString(),
-      servicePackage: selectedPackage,
-      addOns: selectedAddOns,
-      discount,
-      totalPrice: calculateTotal(),
-      clientInfo: clientInfo
-    };
-    // Get existing quotations or initialize empty array
-    const existingQuotations = JSON.parse(localStorage.getItem('quotations') || '[]');
-    existingQuotations.push(quotation);
-    localStorage.setItem('quotations', JSON.stringify(existingQuotations));
-    // Show success notification
-    alert('Quotation saved successfully!');
-    // Navigate to my quotations
-    navigate('/my-quotations');
+    
+    try {
+      // Import Firebase services
+      const { createQuotation } = await import('../services/firebaseService');
+      const { useAuth } = await import('../contexts/AuthContext');
+      
+      const quotation = {
+        name: quotationName,
+        userId: 'current_user_id', // Will be replaced with actual user ID
+        clientInfo: clientInfo,
+        servicePackage: selectedPackage,
+        addOns: selectedAddOns,
+        discount,
+        totalPrice: calculateTotal(),
+        status: 'draft' as const
+      };
+      
+      // Save to Firebase
+      await createQuotation(quotation);
+      
+      // Clear localStorage after successful save
+      localStorage.removeItem('selectedPackageId');
+      localStorage.removeItem('selectedAddOns');
+      localStorage.removeItem('quotationTotal');
+      
+      // Show success notification
+      alert('Quotation saved successfully!');
+      
+      // Navigate to my quotations
+      navigate('/my-quotations');
+    } catch (error) {
+      console.error('Error saving quotation:', error);
+      alert('Error saving quotation. Please try again.');
+    }
   };
   return <div className="bg-lavender-light min-h-screen">
       <Sidebar />
