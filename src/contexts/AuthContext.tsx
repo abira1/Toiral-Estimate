@@ -148,13 +148,18 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const knownTestCodes = ['admin', 'testuser1', 'testuser2', 'testuser3'];
     const isKnownTestCode = knownTestCodes.includes(code.toLowerCase());
     
+    console.log('🧪 Checking test user code:', code, 'isKnownTestCode:', isKnownTestCode);
+    
     // Check if this is a known test user access code with pre-created data
     if (isTestUserAccessCode(code)) {
+      console.log('✅ Found test user access code');
       const testUserInfo = getTestUserInfo(code);
+      console.log('📋 Test user info:', testUserInfo);
       
       if (testUserInfo) {
         // Try to get the pre-created user profile by searching for it
         try {
+          console.log('🔍 Searching for existing user profile...');
           const allUsers = await getAllUsers();
           const profile = allUsers.find(u => 
             u.email === testUserInfo.email || 
@@ -162,13 +167,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
           );
           
           if (profile) {
+            console.log('✅ Found existing profile:', profile.name);
             setUserProfile(profile);
             // Update last active time
             await updateUser(profile.id, { lastActive: new Date().toISOString() });
             return;
           }
         } catch (error) {
-          console.log('Could not fetch existing users, will create new profile');
+          console.log('Could not fetch existing users, will create new profile:', error);
         }
       }
     }
