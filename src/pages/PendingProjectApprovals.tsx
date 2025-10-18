@@ -38,7 +38,7 @@ export function PendingProjectApprovals() {
 
   useEffect(() => {
     loadPendingApprovals();
-  }, [user]);
+  }, [currentUser]);
 
   const loadPendingApprovals = async () => {
     try {
