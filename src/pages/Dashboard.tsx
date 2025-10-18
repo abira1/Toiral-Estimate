@@ -94,28 +94,44 @@ export function Dashboard() {
             <p className="text-gray-600">Welcome back, {userProfile.name}</p>
           </header>
           {/* User Profile Card */}
-          <div className="bg-white rounded-2xl shadow-retro border border-gray-200 p-4 sm:p-6 mb-6">
+          <section className="bg-white rounded-2xl shadow-retro border border-gray-200 p-4 sm:p-6 mb-6" aria-labelledby="user-profile-heading">
             <div className="flex items-center">
-              {userProfile.profilePicture ? <img src={userProfile.profilePicture} alt="Profile" className="w-16 h-16 rounded-full object-cover border-2 border-primary-200" /> : <div className="w-16 h-16 rounded-full bg-primary-100 flex items-center justify-center">
-                  <UserIcon size={32} className="text-primary-500" />
-                </div>}
+              {userProfile.profilePicture ? (
+                <img 
+                  src={userProfile.profilePicture} 
+                  alt={`${userProfile.name}'s profile picture`} 
+                  className="w-16 h-16 rounded-full object-cover border-2 border-primary-200" 
+                />
+              ) : (
+                <div className="w-16 h-16 rounded-full bg-primary-100 flex items-center justify-center" aria-label="Default profile picture">
+                  <UserIcon size={32} className="text-primary-500" aria-hidden="true" />
+                </div>
+              )}
               <div className="ml-4">
-                <h2 className="font-semibold text-lg text-gray-800">
+                <h2 id="user-profile-heading" className="font-semibold text-lg text-gray-800">
                   {userProfile.name}
                 </h2>
                 <p className="text-gray-600">{userProfile.email}</p>
-                <div className="mt-2">
-                  <button onClick={() => navigate('/my-quotations')} className="text-sm text-primary-600 hover:text-primary-800 font-medium">
+                <nav className="mt-2" aria-label="Profile actions">
+                  <button 
+                    onClick={() => navigate('/my-quotations')} 
+                    className="text-sm text-primary-600 hover:text-primary-800 font-medium focus:ring-2 focus:ring-primary-500 focus:outline-none"
+                    aria-label="Navigate to my quotations page"
+                  >
                     View My Quotations
                   </button>
-                  <span className="mx-2 text-gray-300">|</span>
-                  <button onClick={() => navigate('/my-projects')} className="text-sm text-primary-600 hover:text-primary-800 font-medium">
+                  <span className="mx-2 text-gray-300" aria-hidden="true">|</span>
+                  <button 
+                    onClick={() => navigate('/my-projects')} 
+                    className="text-sm text-primary-600 hover:text-primary-800 font-medium focus:ring-2 focus:ring-primary-500 focus:outline-none"
+                    aria-label="Navigate to all projects page"
+                  >
                     View All Projects
                   </button>
-                </div>
+                </nav>
               </div>
             </div>
-          </div>
+          </section>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {/* Current Project Progress */}
             <div className="lg:col-span-2 space-y-6">
