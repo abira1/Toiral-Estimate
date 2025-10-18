@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { UsersIcon, FileTextIcon, PackageIcon, TrendingUpIcon, DollarSignIcon, BarChart3Icon, PieChartIcon } from 'lucide-react';
+import { UsersIcon, FileTextIcon, PackageIcon, TrendingUpIcon, DollarSignIcon, BarChart3Icon, PieChartIcon, UserPlusIcon } from 'lucide-react';
 import { SeedDataButton } from '../SeedDataButton';
+import { InviteUserModal } from './InviteUserModal';
 type ServicePackage = {
   id: string;
   category: string;
