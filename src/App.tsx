@@ -1,5 +1,5 @@
-import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import React, { useState } from 'react';
+import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import { AuthProvider } from './contexts/AuthContext';
 import { DataInitializer } from './components/DataInitializer';
@@ -16,6 +16,9 @@ import { MyProjects } from './pages/MyProjects';
 import { PendingProjectApproval } from './pages/PendingProjectApproval';
 import { InvoicePage } from './pages/InvoicePage';
 import { AnalyticsPage } from './pages/AnalyticsPage';
+import { SearchModal } from './components/SearchModal';
+import { KeyboardShortcutsModal } from './components/KeyboardShortcutsModal';
+import { useKeyboardShortcuts, KeyboardShortcut } from './hooks/useKeyboardShortcuts';
 
 export function App() {
   return (
