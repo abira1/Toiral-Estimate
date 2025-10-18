@@ -234,7 +234,7 @@ export function Dashboard() {
               </section>
               {/* Contact Information */}
               <section className="bg-white rounded-2xl shadow-retro border border-gray-200 p-4 sm:p-6" aria-labelledby="contact-heading">
-                <h2 className="text-xl font-semibold mb-4 text-gray-800">
+                <h2 id="contact-heading" className="text-xl font-semibold mb-4 text-gray-800">
                   Contact Us
                 </h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
