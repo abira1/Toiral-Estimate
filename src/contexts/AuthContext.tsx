@@ -75,6 +75,15 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const loginWithAccessCode = async (code: string) => {
+    // Validate access code format
+    if (!code || code.trim().length === 0) {
+      throw new Error('ACCESS_CODE_EMPTY: Please enter an access code');
+    }
+    
+    if (code.trim().length < 3) {
+      throw new Error('ACCESS_CODE_TOO_SHORT: Access code must be at least 3 characters');
+    }
+    
     // Use anonymous auth
     const userCredential = await signInAnonymously(auth);
     const firebaseUserId = userCredential.user.uid;
