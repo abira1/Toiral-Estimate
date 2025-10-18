@@ -1,0 +1,205 @@
+{
+  "total_tests": 9,
+  "passed_tests": 7,
+  "failed_tests": 2,
+  "warning_tests": 0,
+  "success_rate": 77.77777777777779,
+  "test_results": [
+    {
+      "test": "Frontend Application Access",
+      "status": "PASS",
+      "details": "Application accessible at http://localhost:3000",
+      "error": "",
+      "timestamp": "2025-10-18T06:58:23.128188"
+    },
+    {
+      "test": "Firebase Connectivity",
+      "status": "FAIL",
+      "details": "HTTP 401: {\n  \"error\" : \"Permission denied\"\n}\n",
+      "error": "",
+      "timestamp": "2025-10-18T06:58:24.081569"
+    },
+    {
+      "test": "Firebase Service Functions",
+      "status": "PASS",
+      "details": "All 6 essential functions found",
+      "error": "",
+      "timestamp": "2025-10-18T06:58:24.582594"
+    },
+    {
+      "test": "Firebase TypeScript Interfaces",
+      "status": "PASS",
+      "details": "All 4 interfaces defined",
+      "error": "",
+      "timestamp": "2025-10-18T06:58:24.582629"
+    },
+    {
+      "test": "Access Code Service Functions",
+      "status": "PASS",
+      "details": "All 4 functions found",
+      "error": "",
+      "timestamp": "2025-10-18T06:58:25.082813"
+    },
+    {
+      "test": "Access Code Interface",
+      "status": "PASS",
+      "details": "AccessCode interface defined",
+      "error": "",
+      "timestamp": "2025-10-18T06:58:25.082843"
+    },
+    {
+      "test": "Access Code Expiration",
+      "status": "PASS",
+      "details": "7-day expiration system implemented",
+      "error": "",
+      "timestamp": "2025-10-18T06:58:25.082852"
+    },
+    {
+      "test": "EmailJS Import",
+      "status": "PASS",
+      "details": "EmailJS library imported correctly",
+      "error": "",
+      "timestamp": "2025-10-18T06:58:25.583047"
+    },
+    {
+      "test": "Invitation Email Function",
+      "status": "PASS",
+      "details": "sendInvitationEmail function found",
+      "error": "",
+      "timestamp": "2025-10-18T06:58:25.583078"
+    },
+    {
+      "test": "EmailJS Configuration Usage",
+      "status": "PASS",
+      "details": "EmailJS environment variables used correctly",
+      "error": "",
+      "timestamp": "2025-10-18T06:58:25.583107"
+    },
+    {
+      "test": "Email Error Handling",
+      "status": "PASS",
+      "details": "Error handling implemented",
+      "error": "",
+      "timestamp": "2025-10-18T06:58:25.583114"
+    },
+    {
+      "test": "Access Code Login Function",
+      "status": "PASS",
+      "details": "loginWithAccessCode function found",
+      "error": "",
+      "timestamp": "2025-10-18T06:58:26.083308"
+    },
+    {
+      "test": "Anonymous Authentication",
+      "status": "PASS",
+      "details": "Firebase anonymous authentication implemented",
+      "error": "",
+      "timestamp": "2025-10-18T06:58:26.083343"
+    },
+    {
+      "test": "Access Code Validation",
+      "status": "PASS",
+      "details": "Access code validation implemented",
+      "error": "",
+      "timestamp": "2025-10-18T06:58:26.083350"
+    },
+    {
+      "test": "User Profile Creation",
+      "status": "PASS",
+      "details": "User profile creation from access code implemented",
+      "error": "",
+      "timestamp": "2025-10-18T06:58:26.083355"
+    },
+    {
+      "test": "Pricing Calculation Functions",
+      "status": "PASS",
+      "details": "calculateSubtotal and calculateTotal functions found",
+      "error": "",
+      "timestamp": "2025-10-18T06:58:26.583563"
+    },
+    {
+      "test": "Service Package Price Handling",
+      "status": "PASS",
+      "details": "Service package price properly accessed with null safety",
+      "error": "",
+      "timestamp": "2025-10-18T06:58:26.583592"
+    },
+    {
+      "test": "Add-ons Price Calculation",
+      "status": "PASS",
+      "details": "Add-ons price calculation implemented using reduce function",
+      "error": "",
+      "timestamp": "2025-10-18T06:58:26.583602"
+    },
+    {
+      "test": "Discount Calculation",
+      "status": "PASS",
+      "details": "Discount calculation implemented",
+      "error": "",
+      "timestamp": "2025-10-18T06:58:26.583609"
+    },
+    {
+      "test": "$0 Total Issue Analysis",
+      "status": "PASS",
+      "details": "Root cause identified: Dependency on localStorage for service data; Service package can be null/undefined",
+      "error": "",
+      "timestamp": "2025-10-18T06:58:26.583627"
+    },
+    {
+      "test": "Access Code Creation in Modal",
+      "status": "PASS",
+      "details": "Access code creation integrated in invitation modal",
+      "error": "",
+      "timestamp": "2025-10-18T06:58:27.083817"
+    },
+    {
+      "test": "Email Sending Integration",
+      "status": "PASS",
+      "details": "Email sending integrated in invitation modal",
+      "error": "",
+      "timestamp": "2025-10-18T06:58:27.083847"
+    },
+    {
+      "test": "Invitation Form Fields",
+      "status": "PASS",
+      "details": "All required form fields (email, userName, role) present",
+      "error": "",
+      "timestamp": "2025-10-18T06:58:27.083855"
+    },
+    {
+      "test": "Invitation Success Handling",
+      "status": "PASS",
+      "details": "Success/error handling with toast notifications implemented",
+      "error": "",
+      "timestamp": "2025-10-18T06:58:27.083861"
+    },
+    {
+      "test": "Modal Auto-Close",
+      "status": "PASS",
+      "details": "Modal auto-close on success implemented",
+      "error": "",
+      "timestamp": "2025-10-18T06:58:27.083870"
+    },
+    {
+      "test": "Services Page Implementation",
+      "status": "PASS",
+      "details": "Using ServicesPageNew with Firebase integration",
+      "error": "",
+      "timestamp": "2025-10-18T06:58:27.584028"
+    },
+    {
+      "test": "Service Data Loading",
+      "status": "PASS",
+      "details": "Services page loads data from Firebase using getAllServices()",
+      "error": "",
+      "timestamp": "2025-10-18T06:58:27.584091"
+    },
+    {
+      "test": "Add-ons Data Flow",
+      "status": "FAIL",
+      "details": "Service package data not properly passed",
+      "error": "",
+      "timestamp": "2025-10-18T06:58:27.584134"
+    }
+  ]
+}
