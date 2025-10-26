@@ -52,9 +52,21 @@ export function PendingProjectApproval() {
         setFinalDeliveryTime(14); // Default delivery time
       }
 
-      // Also try to load from workflow system if user is available
-      if (user?.id) {
-        const setup = await getProjectSetupByClient(currentUser.uid);
+      // Get the client ID from localStorage (set during login)
+      const clientId = getCurrentClientId();
+      
+      // Also try to load from workflow system if clientId is available
+      if (clientId) {
+        // Validate access
+        try {
+          requireClientAccess(clientId);
+        } catch (error: any) {
+          toast.error('Access denied. You can only view your own projects.');
+          navigate('/');
+          return;
+        }
+        
+        const setup = await getProjectSetupByClient(clientId);
         if (setup && setup.status === 'sent_to_client') {
           setProjectSetup(setup);
           
