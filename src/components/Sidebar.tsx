@@ -99,6 +99,20 @@ export function Sidebar() {
             </li>
             <li>
               <NavLink 
+                to="/my-packages" 
+                className={({ isActive }) => 
+                  `flex items-center p-3 rounded-xl transition-colors focus:ring-2 focus:ring-primary-500 focus:outline-none ${
+                    isActive ? 'bg-primary-50 text-primary-700' : 'text-gray-600 hover:bg-gray-100'
+                  }`
+                }
+                aria-label="View My Packages"
+              >
+                <PackageIcon size={20} className="flex-shrink-0" aria-hidden="true" />
+                <span className="ml-3 hidden lg:block">My Packages</span>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink 
                 to="/analytics" 
                 className={({ isActive }) => 
                   `flex items-center p-3 rounded-xl transition-colors focus:ring-2 focus:ring-primary-500 focus:outline-none ${
