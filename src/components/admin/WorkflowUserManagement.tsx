@@ -269,9 +269,23 @@ export function WorkflowUserManagement() {
 
             {/* Access Code Display */}
             {client.accessCode && (
-              <div className="mt-4 p-3 bg-gray-50 rounded-lg">
-                <p className="text-xs text-gray-500 mb-1">Access Code:</p>
-                <p className="font-mono text-sm font-bold text-gray-900">{client.accessCode}</p>
+              <div className="mt-4 p-3 bg-green-50 border-2 border-green-300 rounded-lg">
+                <div className="flex items-center justify-between mb-2">
+                  <p className="text-xs font-semibold text-green-700">🔑 LOGIN ACCESS CODE</p>
+                  <button
+                    onClick={() => {
+                      navigator.clipboard.writeText(client.accessCode!);
+                      toast.success('Access code copied!');
+                    }}
+                    className="text-xs text-green-600 hover:text-green-800 underline"
+                  >
+                    Copy
+                  </button>
+                </div>
+                <p className="font-mono text-lg font-bold text-green-900 bg-white px-3 py-2 rounded border border-green-200">
+                  {client.accessCode}
+                </p>
+                <p className="text-xs text-green-600 mt-1">Share this code with client for login</p>
               </div>
             )}
           </div>
