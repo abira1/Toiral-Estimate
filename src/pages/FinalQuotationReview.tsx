@@ -113,16 +113,32 @@ export function FinalQuotationReview() {
   };
 
   const handleConfirmQuotation = async () => {
-    if (!quotationData || !currentUser?.uid) {
-      toast.error('Missing quotation or user data');
+    if (!quotationData) {
+      toast.error('Missing quotation data');
+      return;
+    }
+
+    // Get the client ID from localStorage
+    const clientId = getCurrentClientId();
+    
+    if (!clientId) {
+      toast.error('No client profile found. Please login again.');
+      return;
+    }
+
+    // Validate access
+    try {
+      requireClientAccess(clientId);
+    } catch (error: any) {
+      toast.error('Access denied.');
       return;
     }
 
     setSubmitting(true);
     try {
       const quotation = await createClientQuotation({
-        clientId: currentUser.uid,
-        clientCode: userProfile?.id || 'CLIENT',
+        clientId: clientId,
+        clientCode: clientData?.clientCode || 'CLIENT',
         projectId: quotationData.projectId || 'default',
         selectedAddOns: quotationData.selectedAddOns,
         appliedCoupon: quotationData.appliedCoupon,
