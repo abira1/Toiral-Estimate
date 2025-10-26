@@ -140,6 +140,7 @@ export default defineConfig({
     port: 3000,
     allowedHosts: [
       'code-explorer-83.preview.emergentagent.com',
+      'user-code-gateway.preview.emergentagent.com',
       '.preview.emergentagent.com',
       'localhost'
     ]
