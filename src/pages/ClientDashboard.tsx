@@ -16,6 +16,7 @@ import {
   getClientDashboardData, 
   getProjectSetupByClient 
 } from '../services/workflowService';
+import { getCurrentClientId, requireClientAccess } from '../services/accessControlService';
 import { ClientDashboardData, ProjectSetup } from '../types/workflow';
 import toast from 'react-hot-toast';
 
