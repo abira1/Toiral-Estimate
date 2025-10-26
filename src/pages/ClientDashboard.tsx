@@ -146,11 +146,16 @@ export function ClientDashboard() {
           {/* Welcome Section */}
           <div className="mb-8">
             <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-2">
-              Welcome back, {userProfile?.name || 'Client'}! 👋
+              Welcome back, {dashboardData?.client?.name || userProfile?.name || 'Client'}! 👋
             </h1>
             <p className="text-gray-600">
               Here's an overview of your projects and quotations with Toiral Estimate.
             </p>
+            {dashboardData?.client && (
+              <p className="text-sm text-gray-500 mt-1">
+                Client ID: {dashboardData.client.clientCode}
+              </p>
+            )}
           </div>
 
           {/* Stats Cards */}
