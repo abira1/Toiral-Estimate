@@ -86,6 +86,9 @@ function AppWithKeyboardShortcuts() {
         <Route path="/my-quotations" element={<ProtectedRoute>
               <MyQuotations />
             </ProtectedRoute>} />
+        <Route path="/my-packages" element={<ProtectedRoute>
+              <MyPackages />
+            </ProtectedRoute>} />
         <Route path="/services" element={<ProtectedRoute>
               <ServicesPageNew />
             </ProtectedRoute>} />
