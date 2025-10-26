@@ -72,6 +72,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const logout = async () => {
+    // Clear all client-related data from localStorage
+    localStorage.removeItem('clientId');
+    localStorage.removeItem('clientCode');
+    localStorage.removeItem('userAccessCode');
+    localStorage.removeItem('isAuthenticated');
+    localStorage.removeItem('isAdmin');
+    
     await signOut(auth);
   };
 
