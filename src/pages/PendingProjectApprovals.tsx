@@ -48,10 +48,28 @@ export function PendingProjectApprovals() {
         return;
       }
 
+      // Get the client ID from localStorage (set during login)
+      const clientId = getCurrentClientId();
+      
+      if (!clientId) {
+        toast.error('No client profile found. Please login again.');
+        setLoading(false);
+        return;
+      }
+
+      // Validate access
+      try {
+        requireClientAccess(clientId);
+      } catch (error: any) {
+        toast.error('Access denied. You can only view your own projects.');
+        navigate('/');
+        return;
+      }
+
       const items: PendingProjectItem[] = [];
 
       // Load pending quotations from workflow system
-      const dashboardData = await getClientDashboardData(currentUser.uid);
+      const dashboardData = await getClientDashboardData(clientId);
       
       // Add pending quotations
       dashboardData.pendingApprovals.forEach((quotation) => {
@@ -68,7 +86,7 @@ export function PendingProjectApprovals() {
       });
 
       // Check for pending project setup
-      const projectSetup = await getProjectSetupByClient(currentUser.uid);
+      const projectSetup = await getProjectSetupByClient(clientId);
       if (projectSetup && projectSetup.status === 'sent_to_client') {
         items.push({
           id: projectSetup.id,
