@@ -8,6 +8,7 @@ import { LoginPage } from './pages/LoginPage';
 import { Dashboard } from './pages/Dashboard';
 import { ClientDashboard } from './pages/ClientDashboard';
 import { MyQuotations } from './pages/MyQuotations';
+import { MyPackages } from './pages/MyPackages';
 import { ServicesPageNew } from './pages/ServicesPageNew';
 import { ProtectedRoute } from './components/ProtectedRoute';
 import { AdminPanel } from './pages/AdminPanel';
