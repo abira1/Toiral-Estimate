@@ -51,12 +51,30 @@ export function ClientDashboard() {
         return;
       }
 
-      // Load dashboard data from workflow system
-      const data = await getClientDashboardData(currentUser.uid);
+      // Get the client ID from localStorage (set during login)
+      const clientId = getCurrentClientId();
+      
+      if (!clientId) {
+        toast.error('No client profile found. Please login again.');
+        setLoading(false);
+        return;
+      }
+
+      // Validate access - ensure user can only access their own data
+      try {
+        requireClientAccess(clientId);
+      } catch (error: any) {
+        toast.error('Access denied. You can only view your own profile.');
+        navigate('/');
+        return;
+      }
+
+      // Load dashboard data from workflow system using the correct clientId
+      const data = await getClientDashboardData(clientId);
       setDashboardData(data);
 
       // Check for pending project setup
-      const projectSetup = await getProjectSetupByClient(currentUser.uid);
+      const projectSetup = await getProjectSetupByClient(clientId);
       setPendingProjectSetup(projectSetup);
 
       // Calculate statistics
