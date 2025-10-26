@@ -162,6 +162,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         localStorage.setItem('clientId', clientWithCode.id);
         localStorage.setItem('clientCode', clientWithCode.clientCode);
         localStorage.setItem('userAccessCode', clientWithCode.accessCode || code);
+        localStorage.setItem('isAuthenticated', 'true');
         
         console.log('💾 Stored in localStorage:', {
           clientId: clientWithCode.id,
@@ -170,7 +171,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         });
         
         setUserProfile(clientProfile);
-        return;
+        console.log('✅ Login successful for client:', clientProfile.name);
+        return; // IMPORTANT: Return here to prevent invalid code error
       } else {
         console.log('❌ No client found with code:', code);
       }
