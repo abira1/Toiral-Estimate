@@ -51,7 +51,7 @@ export function FinalQuotationReview() {
 
   useEffect(() => {
     loadQuotationData();
-  }, [location.state, user]);
+  }, [location.state, currentUser]);
 
   const loadQuotationData = async () => {
     try {
