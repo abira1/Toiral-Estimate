@@ -39,7 +39,7 @@ export function PendingProjectApproval() {
   const [showAddOnsModal, setShowAddOnsModal] = useState(false);
   useEffect(() => {
     loadPendingProject();
-  }, [navigate, user]);
+  }, [currentUser]);
 
   const loadPendingProject = async () => {
     try {
