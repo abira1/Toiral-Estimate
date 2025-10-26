@@ -124,13 +124,24 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
     // Second, check if this is a client access code OR client code from the new workflow system
     try {
+      console.log('🔍 Searching for client with code:', code);
       // Try to find client by access code OR client code
       const clientsWithCodes = await getAllClients();
+      console.log('📋 Total clients found:', clientsWithCodes.length);
+      
+      // Log all clients for debugging
+      clientsWithCodes.forEach(client => {
+        console.log(`Client: ${client.name}, AccessCode: ${client.accessCode}, ClientCode: ${client.clientCode}`);
+      });
+      
       const clientWithCode = clientsWithCodes.find(client => 
-        client.accessCode === code || client.clientCode === code
+        (client.accessCode && client.accessCode.toLowerCase() === code.toLowerCase()) || 
+        (client.clientCode && client.clientCode.toLowerCase() === code.toLowerCase())
       );
       
       if (clientWithCode) {
+        console.log('✅ Found matching client:', clientWithCode.name, 'ID:', clientWithCode.id);
+        
         // Create a user profile for this client
         const clientProfile: User = {
           id: firebaseUserId,
@@ -145,13 +156,21 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         // Store client ID and access code for access control validation
         localStorage.setItem('clientId', clientWithCode.id);
         localStorage.setItem('clientCode', clientWithCode.clientCode);
-        localStorage.setItem('userAccessCode', clientWithCode.accessCode || code); // Store the actual access code
+        localStorage.setItem('userAccessCode', clientWithCode.accessCode || code);
+        
+        console.log('💾 Stored in localStorage:', {
+          clientId: clientWithCode.id,
+          clientCode: clientWithCode.clientCode,
+          accessCode: clientWithCode.accessCode
+        });
         
         setUserProfile(clientProfile);
         return;
+      } else {
+        console.log('❌ No client found with code:', code);
       }
     } catch (error) {
-      console.log('Could not validate client access code, checking test user codes');
+      console.log('Could not validate client access code, checking test user codes', error);
     }
     
     // Check if this is a known test user access code with pre-created data
