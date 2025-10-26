@@ -25,8 +25,15 @@ export function LoginPage() {
         console.log('🔄 Navigating to /admin');
         navigate('/admin');
       } else {
-        console.log('🔄 Navigating to /dashboard');
-        navigate('/dashboard');
+        // Check if this is a new workflow client (has clientId in localStorage)
+        const clientId = localStorage.getItem('clientId');
+        if (clientId) {
+          console.log('🔄 Navigating to /client-dashboard for workflow client');
+          navigate('/client-dashboard');
+        } else {
+          console.log('🔄 Navigating to /dashboard for test user');
+          navigate('/dashboard');
+        }
       }
       
       toast.success('Welcome to Toiral!');
