@@ -122,11 +122,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       console.log('Could not validate access code against Firebase, checking other systems');
     }
 
-    // Second, check if this is a client access code from the new workflow system
+    // Second, check if this is a client access code OR client code from the new workflow system
     try {
-      // Try to find client by access code
+      // Try to find client by access code OR client code
       const clientsWithCodes = await getAllClients();
-      const clientWithCode = clientsWithCodes.find(client => client.accessCode === code);
+      const clientWithCode = clientsWithCodes.find(client => 
+        client.accessCode === code || client.clientCode === code
+      );
       
       if (clientWithCode) {
         // Create a user profile for this client
@@ -143,7 +145,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         // Store client ID and access code for access control validation
         localStorage.setItem('clientId', clientWithCode.id);
         localStorage.setItem('clientCode', clientWithCode.clientCode);
-        localStorage.setItem('userAccessCode', code); // Store the access code used for login
+        localStorage.setItem('userAccessCode', clientWithCode.accessCode || code); // Store the actual access code
         
         setUserProfile(clientProfile);
         return;
