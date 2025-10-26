@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { UsersIcon, FileTextIcon, PackageIcon, TrendingUpIcon, DollarSignIcon, BarChart3Icon, PieChartIcon, UserPlusIcon } from 'lucide-react';
 import { SeedDataButton } from '../SeedDataButton';
 import { Phase5SeedButton } from '../Phase5SeedButton';
+import { SeedDataManager } from './SeedDataManager';
 import { InviteUserModal } from './InviteUserModal';
 import { FirebaseMonitor } from './FirebaseMonitor';
 type ServicePackage = {
