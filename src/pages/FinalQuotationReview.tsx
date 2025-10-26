@@ -86,9 +86,21 @@ export function FinalQuotationReview() {
         setQuotationData(data);
       }
 
+      // Get the client ID from localStorage (set during login)
+      const clientId = getCurrentClientId();
+      
       // Load client data
-      if (currentUser?.uid) {
-        const client = await getClient(currentUser.uid);
+      if (clientId) {
+        // Validate access
+        try {
+          requireClientAccess(clientId);
+        } catch (error: any) {
+          toast.error('Access denied. You can only view your own data.');
+          navigate('/');
+          return;
+        }
+        
+        const client = await getClient(clientId);
         setClientData(client);
       }
 
