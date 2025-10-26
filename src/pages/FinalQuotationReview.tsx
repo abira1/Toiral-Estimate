@@ -25,6 +25,7 @@ import {
   createClientQuotation,
   getClient
 } from '../services/workflowService';
+import { getCurrentClientId, requireClientAccess } from '../services/accessControlService';
 import { ProjectAddOn, Coupon, Client } from '../types/workflow';
 import toast from 'react-hot-toast';
 
