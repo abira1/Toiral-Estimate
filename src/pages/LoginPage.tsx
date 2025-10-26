@@ -107,6 +107,10 @@ export function LoginPage() {
               </button>
             </fieldset>
             <div id="access-code-help" className="text-sm text-gray-500 mt-2">
+              <strong>How to Login:</strong><br />
+              • Enter your <strong>Access Code</strong> (8-character code like ABC12XYZ)<br />
+              • Or enter your <strong>Client Code</strong> (e.g., CLI001AB)<br />
+              <br />
               <strong>Test Access Codes:</strong><br />
               • <strong>admin</strong> - Admin panel access<br />
               • <strong>testuser1</strong> - John Smith (active projects)<br />
