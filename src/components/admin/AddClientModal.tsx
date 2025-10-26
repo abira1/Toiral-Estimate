@@ -82,7 +82,15 @@ export function AddClientModal({ isOpen, onClose, onClientAdded }: AddClientModa
 
       const client = await createClient(clientData);
       
-      toast.success(`Client "${client.name}" added successfully! Client Code: ${client.clientCode}`);
+      toast.success(
+        <div>
+          <p className="font-bold">Client "{client.name}" added successfully!</p>
+          <p className="mt-2">Client Code: <span className="font-mono font-bold">{client.clientCode}</span></p>
+          <p className="mt-1">Access Code: <span className="font-mono font-bold text-green-600">{client.accessCode}</span></p>
+          <p className="text-sm text-gray-600 mt-2">Share this access code with the client for login</p>
+        </div>,
+        { duration: 8000 }
+      );
       
       // Reset form
       setFormData({
