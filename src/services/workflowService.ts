@@ -52,10 +52,14 @@ export const createClient = async (clientData: Omit<Client, 'id' | 'clientCode' 
   const clientRef = push(ref(database, 'workflow/clients'));
   const clientId = clientRef.key!;
   
+  // Generate access code immediately when creating client
+  const accessCode = generateAccessCode();
+  
   const client: Client = {
     ...clientData,
     id: clientId,
     clientCode: generateClientCode(),
+    accessCode, // Add access code during creation
     createdAt: new Date().toISOString(),
     status: 'active'
   };
