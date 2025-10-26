@@ -5,6 +5,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { ArrowLeftIcon, CheckIcon, ChevronRightIcon, PlusIcon, XIcon } from 'lucide-react';
 import { AddOnsSelectionModal } from '../components/AddOnsSelectionModal';
 import { getProjectSetupByClient } from '../services/workflowService';
+import { getCurrentClientId, requireClientAccess } from '../services/accessControlService';
 import { ProjectSetup, ProjectAddOn, Coupon } from '../types/workflow';
 import toast from 'react-hot-toast';
 
