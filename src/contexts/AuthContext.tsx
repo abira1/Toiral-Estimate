@@ -85,6 +85,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const loginWithAccessCode = async (code: string) => {
     console.log('🔐 loginWithAccessCode called with:', code);
     
+    // Clear any previous client data before logging in
+    localStorage.removeItem('clientId');
+    localStorage.removeItem('clientCode');
+    localStorage.removeItem('userAccessCode');
+    
     // Validate access code format
     if (!code || code.trim().length === 0) {
       throw new Error('ACCESS_CODE_EMPTY: Please enter an access code');
