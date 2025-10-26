@@ -67,6 +67,12 @@ export function AdminPanel() {
                 <span className="ml-3">Quotations</span>
               </button>
             </li>
+            <li>
+              <button onClick={() => navigate('/admin/package-assignments')} className={`w-full flex items-center p-3 rounded-xl transition-colors ${isActive('/package-assignments') ? 'bg-primary-700 text-white' : 'text-primary-100 hover:bg-primary-700/50'}`}>
+                <Gift size={20} className="flex-shrink-0" />
+                <span className="ml-3">Package Assignments</span>
+              </button>
+            </li>
           </ul>
         </nav>
         <div className="absolute bottom-0 w-full p-4 border-t border-primary-700">
