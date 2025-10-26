@@ -215,7 +215,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       }
     }
     
-    // If no pre-existing profile found, try to create a new one
+    // If no pre-existing profile found, check if it's a known test code, otherwise reject
+    // ONLY create profiles for known test codes (admin, testuser1-3)
+    if (!isKnownTestCode) {
+      console.log('❌ Invalid access code:', code);
+      throw new Error('INVALID_ACCESS_CODE: Invalid access code. Please check your code and try again.');
+    }
+    
     console.log('🔧 Creating new profile for Firebase user:', firebaseUserId);
     try {
       // Check if user profile exists for this Firebase user
@@ -236,6 +242,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       }
       
       console.log('📝 Setting user profile:', profile.name);
+      localStorage.setItem('isAuthenticated', 'true');
+      if (code.toLowerCase() === 'admin') {
+        localStorage.setItem('isAdmin', 'true');
+      }
       setUserProfile(profile);
       console.log('✅ Login successful for:', profile.name);
     } catch (error: any) {
@@ -251,14 +261,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         lastActive: new Date().toISOString()
       };
       console.log('🔄 Using temporary profile:', tempProfile.name);
+      localStorage.setItem('isAuthenticated', 'true');
+      if (code.toLowerCase() === 'admin') {
+        localStorage.setItem('isAdmin', 'true');
+      }
       setUserProfile(tempProfile);
       console.log('✅ Login successful with temp profile for:', tempProfile.name);
-    }
-    
-    // If we reached here and it's not a known test code, it's invalid
-    if (!isKnownTestCode) {
-      console.log('❌ Invalid access code:', code);
-      throw new Error('INVALID_ACCESS_CODE: Invalid access code. Please check your code and try again.');
     }
   };
 
