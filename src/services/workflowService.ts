@@ -518,7 +518,8 @@ export const sendClientInvitation = async (clientId: string, projectId: string):
     throw new Error('Client or project not found');
   }
   
-  // Generate access code if not exists
+  // Access code should already exist from client creation
+  // Generate it only if it somehow doesn't exist (backward compatibility)
   if (!client.accessCode) {
     const accessCode = generateAccessCode();
     await updateClient(clientId, { accessCode });
