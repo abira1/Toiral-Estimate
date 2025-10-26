@@ -54,6 +54,8 @@ export function ClientDashboard() {
       // Get the client ID from localStorage (set during login)
       const clientId = getCurrentClientId();
       
+      console.log('📊 ClientDashboard - Loading data for clientId:', clientId);
+      
       if (!clientId) {
         toast.error('No client profile found. Please login again.');
         setLoading(false);
@@ -63,14 +65,18 @@ export function ClientDashboard() {
       // Validate access - ensure user can only access their own data
       try {
         requireClientAccess(clientId);
+        console.log('✅ Access validated for clientId:', clientId);
       } catch (error: any) {
+        console.error('❌ Access denied for clientId:', clientId);
         toast.error('Access denied. You can only view your own profile.');
         navigate('/');
         return;
       }
 
       // Load dashboard data from workflow system using the correct clientId
+      console.log('🔄 Fetching dashboard data from Firebase for clientId:', clientId);
       const data = await getClientDashboardData(clientId);
+      console.log('✅ Dashboard data loaded for client:', data.client.name);
       setDashboardData(data);
 
       // Check for pending project setup
