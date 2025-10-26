@@ -133,9 +133,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
           phone: clientWithCode.phone
         };
         
-        // Store client ID for reference
+        // Store client ID and access code for access control validation
         localStorage.setItem('clientId', clientWithCode.id);
         localStorage.setItem('clientCode', clientWithCode.clientCode);
+        localStorage.setItem('userAccessCode', code); // Store the access code used for login
         
         setUserProfile(clientProfile);
         return;
