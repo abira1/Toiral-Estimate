@@ -137,6 +137,18 @@ export function AdminDashboard() {
         <FirebaseMonitor />
       </div>
 
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+        {/* Seed Data Manager */}
+        <div className="lg:col-span-1">
+          <SeedDataManager />
+        </div>
+        
+        {/* Firebase Monitor */}
+        <div className="lg:col-span-2">
+          <FirebaseMonitor />
+        </div>
+      </div>
+
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Recent Quotations */}
         <div className="lg:col-span-2 bg-white rounded-2xl shadow-retro border border-gray-200 p-6">
